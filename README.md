@@ -1,1 +1,2 @@
 # Food-CivilSupplies
+Food and Civil Supplies Management System is a Government Food Distributing System at subsidized rates depending upon the income of a Particular Family. It is also known as ration Card Management System. This website will reduce the clerical work and time in the Fair Price shop. This application will keep allotment reports of each month up-to-date so this may help in report generations.This is a Student Project developed using HTML,CSS,Javascript,PHP and MySQL Server.
