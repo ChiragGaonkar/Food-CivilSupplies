@@ -11,6 +11,7 @@ if (isset($_POST['ulogin_submit'])) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['fname'] = $row['UFNAME'];
         $_SESSION['lname'] = $row['ULNAME'];
+        $_SESSION['UAADHAR'] = $row['UAADHAR'];
         header("refresh:5;url=upersonal.php");
         echo "<div class='alert alert-success alert-dismissible fade show' role='alert'
             style='max-width: 70%; position: absolute; top: 10%;' >

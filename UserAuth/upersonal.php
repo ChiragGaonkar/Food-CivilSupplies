@@ -2,6 +2,19 @@
 include "../config.php";
 session_start();
 error_reporting(0);
+if (isset($_SESSION['UAADHAR'])) {
+    $sql = "SELECT * FROM user_data WHERE UAADHAR = {$_SESSION['UAADHAR']}";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $fname = $row['UFNAME'];
+    $lname = $row['ULNAME'];
+    $dob = $row['UDOB'];
+    $address = $row['UADDRESS'];
+    $district = $row['UDISTRICT'];
+    $email = $row['UEMAIL'];
+    $phone = $row['UPHONE'];
+    $aadhar = $row['UAADHAR'];
+}
 
 ?>
 
@@ -16,28 +29,229 @@ error_reporting(0);
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="ustyle.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+    </style>
+    <title>Personal Details</title>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="padding: 10px 30px 10px 30px">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../home.php">
+                <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
+                <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
+                <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
+                Food & Civil Supplies
+            </a>
 
-    <h1>Personal Info</h1>
-    <?php echo "<h1>Welcome " . $_SESSION['fname'] . "</h1>"; ?>
-    <a href="ulogout.php">Log me out</a>
-    <div class="col-lg-4">
+            <!-- Button which pops when window is minimized -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav" style="margin-left: auto;">
+                    <!-- Personal Info -->
+                    <li class="nav-item">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                            href="upersonal.php">Personal Info</a>
+                    </li>
+
+                    <!-- User & Courier Details-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            My Fair Price Shop
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="../Images/BuyProducts.png" style="width: 40px;" alt="Admin">
+                                    Buy Awesome Products
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="../Images/AddToCart.png" style="width: 40px;" alt="Admin">
+                                    Check my Cart
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <img src="../Images/OrderStatus.png" style="width: 40px;" alt="Admin">
+                                    Check my Order Status
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Contact Us -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
+                    </li>
+
+                    <!-- LogOut -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 10px;" href="ulogout.php">Log-Out</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+
+    <!-- Personal Data -->
+    <?php
+    if (isset($_SESSION['UAADHAR'])) {
+        echo "
+     <div class='container personalContainer' style='background-color:#FDF5DF;height:auto;'>
+     <div class='row justify-content-center align-items-center'>
+         <img src='../Images/UserPersonal.png' class='col-md-4 img-fluid personal-img'
+             style='margin: 40px 0px 40px 0px;'>
+         <div class='col-md-4 text-start personaldivinfo'>
+             <h4>Name : {$fname} {$lname}</h4>
+             <h4>Aadhar Number : {$aadhar}</h4>
+             <h4>Date Of Birth : {$dob}</h4>
+             <h4>Address : {$address}</h4>
+             <h4>District : {$district}</h4>
+             <h4>Email : {$email}</h4>
+             <h4>Phone Number : {$phone}</h4>
+         </div>
+     </div>
+    </div>
+     ";
+    } else {
+        echo "
+        <div>
+            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
+        </div>
+        ";
+    }
+    ?>
+
+    <!-- <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <h5>Date : 2021-12-06</h5>
+            </div>
+            <div class="col-md-6 text-center">
+                <h5>Reference Id : 18277269</h5>
+            </div>
+            <hr>
+        </div>
+        <div class='row justify-content-center align-content-center'>
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">35457</th>
+                        <td>Wheat</td>
+                        <td>5 Kilogram</td>
+                        <td>₹ 40</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">34525</th>
+                        <td>Rice</td>
+                        <td>5 Kilogram</td>
+                        <td>₹ 20</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">37373</th>
+                        <td>Cooking Oil</td>
+                        <td>2 Litres</td>
+                        <td>₹ 100</td>
+                    </tr>
+                    <tr class="table-success">
+                        <th colspan="3">Grand Total Ammount</th>
+                        <td>₹ 160</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+
+
+    <!-- End of Personal -->
+
+    <!-- Footer -->
+    <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">Department of Goa</p>
+                <hr>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/instagram-new.png" /></a>
+                <a href="#" class="fs-5 mb-4" style="margin-right: 20px; margin-left: 20px;"><img
+                        src="https://img.icons8.com/nolan/64/twitter.png" /></a>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/whatsapp.png" /></a>
+            </div>
+        </div>
+    </div>
+    <!-- End of Footer -->
+
+    <!-- <div class="container" style="max-width: 80%; background:chocolate">
+        <div class="row">
+            <div class="col">
+                <img src="https://img.icons8.com/bubbles/300/000000/user.png" />
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col text-center">
+                        <h4>{$fname} {$lname}</h4>
+                    </div>
+                    <div class="col text-center">
+                        <h4>{$dob}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h4>{$address}</h4>
+                    </div>
+                    <div class="col text-center">
+                        <h4>{$district}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h4>{$email}</h4>
+                    </div>
+                    <div class="col text-center">
+                        <h4>{$phone}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End of Personal Data -->
+
+
+    <!-- <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
             role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
                 dy=".3em">140x140</text>
         </svg>
-
-        <h2>Heading</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first
-            column.</p>
-        <p><a class="btn btn-secondary" href="#">View details »</a></p>
-    </div>
+    </div> -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 

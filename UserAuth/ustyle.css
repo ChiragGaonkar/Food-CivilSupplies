@@ -1,3 +1,6 @@
+body {
+  background: #5ebec4;
+}
 .myform {
   border: 0px solid;
   width: auto;
@@ -10,4 +13,35 @@
 
 .inputs {
   margin-top: 5px;
+}
+
+.personalContainer {
+  max-width: 80%;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.personal-img {
+  width: 250px;
+}
+
+.personaldivinfo {
+  background: #f92c85;
+  padding: 40px;
+  margin: 40px;
+  border-radius: 20px;
+  width: 700px;
+  overflow-wrap: break-word;
+  font-family: "Cabin", sans-serif;
+  color: #fdf5df;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
+}
+
+.myRationList {
+  max-width: 80%;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  margin-top: 20px;
+  padding: 20px;
+  color: #f92c85;
 }
