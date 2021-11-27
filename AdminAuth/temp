@@ -1,0 +1,33 @@
+<?php
+    $sql = "SELECT * FROM user_data";
+    $result = mysqli_query($connection, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        echo "<div class='row'>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "
+                <div class='col'>
+                    <div class='card'>
+                    <div class='card-body'>
+                    <h5 class='card-title'>Card title</h5>
+                    <h5 class='card-title'>Personal Details</h5>
+                        <h6 class='card-text'>Name : {$row['UFNAME']} {$row['ULNAME']}</h6>
+                        <h6 class='card-text'>Aadhar Number : {$row['UAADHAR']}</h6>
+                        <h6 class='card-text'> Gender : {$row['UGENDER']}</h6>
+                        <h6 class='card-text'> Date of Birth : {$row['UDOB']}</h6>
+                        <h6 class='card-text'> Address : {$row['UADDRESS']}</h6>
+                        <h6 class='card-text'> District : {$row['UDISTRICT']}</h6>
+                    <h5 class='card-title'>Contact Details</h5>
+                        <h6 class='card-text'> Email : {$row['UEMAIL']}</h6>
+                        <h6 class='card-text'> Phone Number : {$row['UPHONE']}</h6>
+                    </div>
+                    </div>
+                </div>
+            ";
+        }
+        echo "</div>";
+    } else {
+        echo "0 Users Found.";
+    }
+
+
+    ?>

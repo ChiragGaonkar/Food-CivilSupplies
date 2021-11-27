@@ -1,0 +1,13 @@
+.myform {
+  border: 0px solid;
+  width: auto;
+  padding: 30px;
+  border-radius: 8px;
+  /* background-image: linear-gradient(to bottom right, #5ebec4, white); */
+  background-color: #cae7df;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
+
+.inputs {
+  margin-top: 5px;
+}
