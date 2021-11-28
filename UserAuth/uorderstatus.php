@@ -33,7 +33,7 @@ if (isset($_SESSION['UAADHAR'])) {
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
     </style>
-    <title>Personal Details</title>
+    <title>Order Status</title>
 </head>
 
 <body>
@@ -58,14 +58,14 @@ if (isset($_SESSION['UAADHAR'])) {
                 <ul class="navbar-nav" style="margin-left: auto;">
                     <!-- Personal Info -->
                     <li class="nav-item">
-                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
                             href="upersonal.php">Personal Info</a>
                     </li>
 
                     <!-- User & Courier Details-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" style="margin-right: 10px;" href="#"
+                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             My Fair Price Shop
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -112,85 +112,7 @@ if (isset($_SESSION['UAADHAR'])) {
     </nav>
     <!-- End of Navbar -->
 
-    <!-- Personal Data -->
-    <?php
-    if (isset($_SESSION['UAADHAR'])) {
-        echo "
-     <div class='container personalContainer' style='background-color:#FDF5DF;height:auto;'>
-     <div class='row justify-content-center align-items-center'>
-         <img src='../Images/UserPersonal.png' class='col-md-4 img-fluid personal-img'
-             style='margin: 40px 0px 40px 0px;'>
-         <div class='col-md-4 text-start personaldivinfo'>
-             <h4>Name : {$fname} {$lname}</h4>
-             <h4>Aadhar Number : {$aadhar}</h4>
-             <h4>Date Of Birth : {$dob}</h4>
-             <h4>Address : {$address}</h4>
-             <h4>District : {$district}</h4>
-             <h4>Email : {$email}</h4>
-             <h4>Phone Number : {$phone}</h4>
-         </div>
-     </div>
-    </div>
-     ";
-    } else {
-        echo "
-        <div>
-            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
-        </div>
-        ";
-    }
-    ?>
-
-    <!-- <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h5>Date : 2021-12-06</h5>
-            </div>
-            <div class="col-md-6 text-center">
-                <h5>Reference Id : 18277269</h5>
-            </div>
-            <hr>
-        </div>
-        <div class='row justify-content-center align-content-center'>
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">35457</th>
-                        <td>Wheat</td>
-                        <td>5 Kilogram</td>
-                        <td>₹ 40</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">34525</th>
-                        <td>Rice</td>
-                        <td>5 Kilogram</td>
-                        <td>₹ 20</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">37373</th>
-                        <td>Cooking Oil</td>
-                        <td>2 Litres</td>
-                        <td>₹ 100</td>
-                    </tr>
-                    <tr class="table-success">
-                        <th colspan="3">Grand Total Ammount</th>
-                        <td>₹ 160</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div> -->
-
-
-    <!-- End of Personal -->
+    <h1>Order Status</h1>
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
