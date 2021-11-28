@@ -3,17 +3,6 @@ include "../config.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION['UAADHAR'])) {
-    $sql = "SELECT * FROM user_data WHERE UAADHAR = {$_SESSION['UAADHAR']}";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $fname = $row['UFNAME'];
-    $lname = $row['ULNAME'];
-    $dob = $row['UDOB'];
-    $address = $row['UADDRESS'];
-    $district = $row['UDISTRICT'];
-    $email = $row['UEMAIL'];
-    $phone = $row['UPHONE'];
-    $aadhar = $row['UAADHAR'];
 }
 
 ?>
