@@ -14,6 +14,7 @@ if (isset($_SESSION['UAADHAR'])) {
     $email = $row['UEMAIL'];
     $phone = $row['UPHONE'];
     $aadhar = $row['UAADHAR'];
+    $gender = $row['UGENDER'];
 }
 
 ?>
@@ -115,10 +116,11 @@ if (isset($_SESSION['UAADHAR'])) {
     <!-- Personal Data -->
     <?php
     if (isset($_SESSION['UAADHAR'])) {
+        ($gender == "Male") ? $imgurl = "../Images/boy.png" : $imgurl = "../Images/girl.png";
         echo "
      <div class='container personalContainer' style='background-color:#FDF5DF;height:auto;'>
      <div class='row justify-content-center align-items-center'>
-         <img src='../Images/UserPersonal.png' class='col-md-4 img-fluid personal-img'
+         <img src='{$imgurl}' class='col-md-4 img-fluid personal-img'
              style='margin: 40px 0px 40px 0px;'>
          <div class='col-md-4 text-start personaldivinfo'>
              <h4>Name : {$fname} {$lname}</h4>

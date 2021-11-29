@@ -119,51 +119,6 @@ if (isset($_SESSION['UAADHAR'])) {
     </div>
     <!-- End of Footer -->
 
-    <!-- <div class="container" style="max-width: 80%; background:chocolate">
-        <div class="row">
-            <div class="col">
-                <img src="https://img.icons8.com/bubbles/300/000000/user.png" />
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$fname} {$lname}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$dob}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$address}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$district}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$email}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$phone}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- End of Personal Data -->
-
-
-    <!-- <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
-                dy=".3em">140x140</text>
-        </svg>
-    </div> -->
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

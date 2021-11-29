@@ -2,9 +2,6 @@
 include "../config.php";
 session_start();
 error_reporting(0);
-if (isset($_SESSION['UAADHAR'])) {
-}
-
 ?>
 
 <!doctype html>
@@ -105,118 +102,42 @@ img {
         </div>
     </nav>
     <!-- End of Navbar -->
-    <div class='row d-flex justify-content-center productcard'>
-        <div class="card productcard mt-auto" style="width: 20rem; background: #fdf5df">
-            <h5 class="card-header text-center">Wheat</h5>
-            <img src="../Images/Wheat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>200 kg</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>₹ 100</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-grid gap-2">
-                    <input class="btn btn-success" type="submit" name="ureg_otp" value="Add to Cart"
-                        style="background-color: #F92C85; border:#F92C85">
+
+    <!-- Product Details -->
+    <?php
+    if (isset($_SESSION['UAADHAR'])) {
+        $sql = "SELECT * FROM product_data";
+        $result = mysqli_query($connection, $sql);
+        echo "<div class='row d-flex justify-content-center productcard'>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "
+            <div class='card productcard mt-auto' style='width: 20rem; background: #fdf5df'>
+                <h5 class='card-header text-center'>{$row['PNAME']}</h5>
+                <img src='../Images/Wheat.jpg' class='card-img-top' alt='...'>
+                <div class='card-body'>
+                    <table class='table table-borderless'>
+                        <tbody>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>{$row['QUANTITY']}  {$row['PTYPE']}</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>₹ {$row['PRICE']}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class='d-grid gap-2'>
+                        <input class='btn btn-success' type='submit' name='uproduct' value='Add to Cart'
+                            style='background-color: #F92C85; border:#F92C85'>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card productcard mt-auto" style="width: 20rem; background: #fdf5df">
-            <h5 class="card-header text-center">Wheat</h5>
-            <img src="../Images/Wheat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>200 kg</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>₹ 100</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-grid gap-2">
-                    <input class="btn btn-success" type="submit" name="ureg_otp" value="Add to Cart"
-                        style="background-color: #F92C85; border:#F92C85">
-                </div>
-            </div>
-        </div>
-        <div class="card productcard mt-auto" style="width: 20rem; background: #fdf5df">
-            <h5 class="card-header text-center">Wheat</h5>
-            <img src="../Images/Wheat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>200 kg</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>₹ 100</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-grid gap-2">
-                    <input class="btn btn-success" type="submit" name="ureg_otp" value="Add to Cart"
-                        style="background-color: #F92C85; border:#F92C85">
-                </div>
-            </div>
-        </div>
-        <div class="card productcard mt-auto" style="width: 20rem; background: #fdf5df">
-            <h5 class="card-header text-center">Wheat</h5>
-            <img src="../Images/Wheat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>200 kg</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>₹ 100</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-grid gap-2">
-                    <input class="btn btn-success" type="submit" name="ureg_otp" value="Add to Cart"
-                        style="background-color: #F92C85; border:#F92C85">
-                </div>
-            </div>
-        </div>
-        <div class="card productcard mt-auto" style="width: 20rem; background: #fdf5df">
-            <h5 class="card-header text-center">Wheat</h5>
-            <img src="../Images/Wheat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>200 kg</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>₹ 100</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-grid gap-2">
-                    <input class="btn btn-success" type="submit" name="ureg_otp" value="Add to Cart"
-                        style="background-color: #F92C85; border:#F92C85">
-                </div>
-            </div>
-        </div>
-    </div>
+            ";
+        }
+        echo "</div>";
+    }
+    ?>
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
@@ -233,51 +154,6 @@ img {
         </div>
     </div>
     <!-- End of Footer -->
-
-    <!-- <div class="container" style="max-width: 80%; background:chocolate">
-        <div class="row">
-            <div class="col">
-                <img src="https://img.icons8.com/bubbles/300/000000/user.png" />
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$fname} {$lname}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$dob}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$address}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$district}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$email}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$phone}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- End of Personal Data -->
-
-
-    <!-- <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
-                dy=".3em">140x140</text>
-        </svg>
-    </div> -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
