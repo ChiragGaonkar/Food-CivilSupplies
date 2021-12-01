@@ -11,13 +11,19 @@ require 'vendor/autoload.php';
 function sendUserOtp($user_email, $otp, $fname, $lname, $reason)
 {
     if ($reason == 'register') {
+        $message_subj = 'OTP to confirm registration on FCS Auth';
         $message_body = "Dear {$fname} {$lname},
         {$otp} is your One Time Password (OTP) to complete your registration process
         for Food & Civil Supplies Auth.";
     } else if ($reason == 'forgot') {
+        $message_subj = 'OTP to Change Password of FCS Auth';
         $message_body = "Dear {$fname} {$lname},
         {$otp} is your One Time Password (OTP) to change your old Password
         for Food & Civil Supplies Auth.";
+    } else {
+        //sendUserOtp("foodcivilsupplies@gmail.com", 0000, "Admin", $district, $message_body);
+        // $message_subj = "To Admin of {$lname}";
+        // $message_body = "{$reason}";
     }
 
     $mail = new PHPMailer();
@@ -33,7 +39,7 @@ function sendUserOtp($user_email, $otp, $fname, $lname, $reason)
     $mail->addAddress($user_email);     //Add a recipient
     $mail->isHTML(true); //Set email format to HTML
     $mail->MsgHTML($message_body);
-    $mail->Subject = 'OTP to confirm registration on FCS Auth';
+    $mail->Subject = $message_subj;
     $mail->Body    = $message_body;
     $result = $mail->send();
     return $result;

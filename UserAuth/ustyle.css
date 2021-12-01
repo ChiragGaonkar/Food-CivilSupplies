@@ -1,5 +1,5 @@
 body {
-  background: #5ebec4;
+  background: #1d1d2c;
 }
 .myform {
   border: 0px solid;
@@ -46,6 +46,41 @@ body {
   color: #f92c85;
 }
 
+.outerproductcard {
+  margin: 20px;
+}
+
 .productcard {
   margin: 20px;
+  background-color: #fdf5df;
+  color: #f92c85;
+  transition-duration: 0.4s;
+  border-left: 8px solid #f92c85;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.productcard:hover {
+  margin: 20px;
+  background-color: #f92c85;
+  color: #fdf5df;
+  transition-duration: 0.4s;
+  border-left: 8px solid #fdf5df;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.personalDateButton {
+  background-color: #fdf5df;
+  color: #f92c85;
+  border: #fdf5df;
+  transition-duration: 0.4s;
+}
+
+.personalDateButton:hover {
+  background-color: #f92c85;
+  color: #fdf5df;
+  border: #fdf5df;
 }

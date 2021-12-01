@@ -51,38 +51,18 @@ if (isset($_SESSION['UAADHAR'])) {
                             href="upersonal.php">Personal Info</a>
                     </li>
 
-                    <!-- User & Courier Details-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" style="margin-right: 10px;" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Fair Price Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="uproductpage.php">
-                                    <img src="../Images/BuyProducts.png" style="width: 40px;" alt="Admin">
-                                    Buy Awesome Products
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="ucart.php">
-                                    <img src="../Images/AddToCart.png" style="width: 40px;" alt="Admin">
-                                    Check my Cart
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="uorderstatus.php">
-                                    <img src="../Images/OrderStatus.png" style="width: 40px;" alt="Admin">
-                                    Check my Order Status
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="uproductpage.php">Buy
+                            Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                            href="uorderstatus.php">Order Status</a>
                     </li>
 
                     <!-- Contact Us -->
@@ -100,7 +80,6 @@ if (isset($_SESSION['UAADHAR'])) {
         </div>
     </nav>
     <!-- End of Navbar -->
-
     <h1>Order Status</h1>
 
     <!-- Footer -->

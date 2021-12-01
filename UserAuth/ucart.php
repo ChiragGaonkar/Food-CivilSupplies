@@ -3,8 +3,18 @@ include "../config.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION['UAADHAR'])) {
+    if (isset($_POST['uremoveproduct'])) {
+        $pid = $_POST['uremoveproduct'];
+        $uaadhar = $_SESSION['UAADHAR'];
+        $sql = "DELETE FROM cart_data WHERE PID = $pid  AND UAADHAR = $uaadhar";
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+            header('location:ucart.php');
+            return;
+        } else {
+        }
+    }
 }
-
 ?>
 
 <!doctype html>
@@ -51,38 +61,19 @@ if (isset($_SESSION['UAADHAR'])) {
                             href="upersonal.php">Personal Info</a>
                     </li>
 
-                    <!-- User & Courier Details-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" style="margin-right: 10px;" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Fair Price Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="uproductpage.php">
-                                    <img src="../Images/BuyProducts.png" style="width: 40px;" alt="Admin">
-                                    Buy Awesome Products
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="ucart.php">
-                                    <img src="../Images/AddToCart.png" style="width: 40px;" alt="Admin">
-                                    Check my Cart
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="uorderstatus.php">
-                                    <img src="../Images/OrderStatus.png" style="width: 40px;" alt="Admin">
-                                    Check my Order Status
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="uproductpage.php">Buy
+                            Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page" href="ucart.php">My
+                            Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="uorderstatus.php">Order Status</a>
                     </li>
 
                     <!-- Contact Us -->
@@ -101,82 +92,64 @@ if (isset($_SESSION['UAADHAR'])) {
     </nav>
     <!-- End of Navbar -->
 
-    <div class='row d-flex justify-content-center productcard'>
-        <div class="card mb-3 mt-auto" style="max-width: 100%;background-color: #fdf5df;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="../Images/Wheat.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h2 class="text-center">Wheat</h2>
+    <!-- Products which are added in Cart -->
+    <?php
+    if (isset($_SESSION['UAADHAR'])) {
+        $uaadhar = $_SESSION['UAADHAR'];
+        $sql1 = "SELECT * FROM product_data WHERE PID IN(SELECT PID FROM cart_data WHERE UAADHAR = $uaadhar)";
+        $result1 = mysqli_query($connection, $sql1);
+        echo "<div class='row d-flex justify-content-center outerproductcard'>";
+        while ($row = mysqli_fetch_assoc($result1)) {
+            echo "
+        <div class='col-md-6'>
+            <div class='card mb-3 mt-auto' style='max-width: 100%;background-color: #fdf5df;'>
+                <div class='row g-0'>
+                    <!-- <div class='col-md-4'>
+                        <img src='../Images/Wheat.jpg' class='img-fluid rounded-start' alt='...'>
+                    </div> -->
+                    <!-- <div class='col-md-8'> -->
+                    <div class='card-body'>
+                        <h2 class='text-center'>{$row['PNAME']}</h2>
                         <hr>
-                        <table class="table table-borderless">
+                        <table class='table table-borderless'>
                             <tbody>
                                 <tr>
-                                    <th>Product ID</th>
-                                    <th>23535</th>
+                                    <th class='text-start'>Product ID</th>
+                                    <th class='text-end'>{$row['PID']}</th>
                                 </tr>
                                 <tr>
-                                    <th>Delivery ID</th>
-                                    <th>28282</th>
+                                    <th class='text-start'>Quantity</th>
+                                    <th class='text-end'>{$row['QUANTITY']} {$row['PTYPE']}</th>
                                 </tr>
                                 <tr>
-                                    <th>Quantity</th>
-                                    <th>200 kg</th>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <th>₹ 100</th>
+                                    <th class='text-start'>Price</th>
+                                    <th class='text-end'>₹ {$row['PRICE']}</th>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="d-grid gap-2">
-                            <input class="btn btn-success " type="submit" name="ureg_otp" value="Remove From Cart"
-                                style="background-color: #F92C85; border:#F92C85">
+                        <form method='POST'>
+                        <div class='d-grid gap-2'>
+                        <button class='btn btn-success shadow-none' type='submit' name='uremoveproduct' value={$row['PID']}
+                        style='background-color: #F92C85; border:#F92C85; color:#fdf5df'>Remove from Cart</button>
                         </div>
+                        </form>
                     </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
-        <div class="card mb-3 mt-auto" style="max-width: 100%; background-color: #fdf5df;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="../Images/Wheat.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h2 class="text-center">Wheat</h2>
-                        <hr>
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <th>Product ID</th>
-                                    <th>23535</th>
-                                </tr>
-                                <tr>
-                                    <th>Delivery ID</th>
-                                    <th>28282</th>
-                                </tr>
-                                <tr>
-                                    <th>Quantity</th>
-                                    <th>200 kg</th>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <th>₹ 100</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="d-grid gap-2">
-                            <input class="btn btn-success " type="submit" name="ureg_otp" value="Remove From Cart"
-                                style="background-color: #F92C85; border:#F92C85">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        ";
+        }
+        echo "</div>";
+    } else {
+        echo "
+        <div>
+            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
         </div>
-    </div>
+        ";
+    }
+    ?>
+    <!-- End of Products which are added in cart -->
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">

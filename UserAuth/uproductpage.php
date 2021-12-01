@@ -2,6 +2,25 @@
 include "../config.php";
 session_start();
 error_reporting(0);
+if (isset($_SESSION['UAADHAR'])) {
+    if (isset($_POST['uproduct'])) {
+        $pid = mysqli_escape_string($connection, $_POST['uproduct']);
+        $uaadhar = $_SESSION['UAADHAR'];
+        $sql1 = "SELECT CART_QUANTITY FROM cart_data WHERE PID = $pid AND UAADHAR = $uaadhar";
+        $result1 = mysqli_query($connection, $sql1);
+        $row = mysqli_fetch_assoc($result1);
+        $quantity = $row['CART_QUANTITY'] + 1;
+        if (mysqli_num_rows($result1) > 0) {
+            $sql2 = "UPDATE cart_data SET CART_QUANTITY = $quantity WHERE PID = $pid AND UAADHAR = $uaadhar";
+            $result2 = mysqli_query($connection, $sql2);
+        } else {
+            $sql3 = "INSERT INTO cart_data(PID, UAADHAR, CART_QUANTITY) VALUES ($pid,$uaadhar, $quantity)";
+            $result3 = mysqli_query($connection, $sql3);
+        }
+        header('location:uproductpage.php');
+        return;
+    }
+}
 ?>
 
 <!doctype html>
@@ -53,38 +72,18 @@ img {
                             href="upersonal.php">Personal Info</a>
                     </li>
 
-                    <!-- User & Courier Details-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" style="margin-right: 10px;" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Fair Price Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="uproductpage.php">
-                                    <img src="../Images/BuyProducts.png" style="width: 40px;" alt="Admin">
-                                    Buy Awesome Products
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="ucart.php">
-                                    <img src="../Images/AddToCart.png" style="width: 40px;" alt="Admin">
-                                    Check my Cart
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="uorderstatus.php">
-                                    <img src="../Images/OrderStatus.png" style="width: 40px;" alt="Admin">
-                                    Check my Order Status
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-item ">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                            href="uproductpage.php">Buy Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="uorderstatus.php">Order Status</a>
                     </li>
 
                     <!-- Contact Us -->
@@ -102,20 +101,19 @@ img {
         </div>
     </nav>
     <!-- End of Navbar -->
-
     <!-- Product Details -->
     <?php
     if (isset($_SESSION['UAADHAR'])) {
         $sql = "SELECT * FROM product_data";
         $result = mysqli_query($connection, $sql);
-        echo "<div class='row d-flex justify-content-center productcard'>";
+        echo "<div class='row d-flex justify-content-center outerproductcard'>";
         while ($row = mysqli_fetch_assoc($result)) {
             echo "
-            <div class='card productcard mt-auto' style='width: 20rem; background: #fdf5df'>
-                <h5 class='card-header text-center'>{$row['PNAME']}</h5>
+            <div class='card productcard mt-auto' style='width: 20rem;'>
+            <hr><h5 class='card-title text-center'>{$row['PNAME']}</h5><hr>
                 <img src='../Images/Wheat.jpg' class='card-img-top' alt='...'>
                 <div class='card-body'>
-                    <table class='table table-borderless'>
+                    <table class='table table-borderless' style='margin:20px'>
                         <tbody>
                             <tr>
                                 <td>Quantity</td>
@@ -127,15 +125,23 @@ img {
                             </tr>
                         </tbody>
                     </table>
+                    <form method='POST'>
                     <div class='d-grid gap-2'>
-                        <input class='btn btn-success' type='submit' name='uproduct' value='Add to Cart'
-                            style='background-color: #F92C85; border:#F92C85'>
+                        <button class='btn btn-success shadow-none' type='submit' name='uproduct' value={$row['PID']}
+                            style='background-color: #F92C85; border:#F92C85; color:#fdf5df'>Add to cart</button>
                     </div>
+                    </form>
                 </div>
             </div>
             ";
         }
         echo "</div>";
+    } else {
+        echo "
+            <div>
+                <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
+            </div>
+            ";
     }
     ?>
 

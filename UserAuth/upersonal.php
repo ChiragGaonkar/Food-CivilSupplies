@@ -1,5 +1,6 @@
 <?php
 include "../config.php";
+include "../mail_sender.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION['UAADHAR'])) {
@@ -15,6 +16,12 @@ if (isset($_SESSION['UAADHAR'])) {
     $phone = $row['UPHONE'];
     $aadhar = $row['UAADHAR'];
     $gender = $row['UGENDER'];
+} else {
+    echo "
+        <div>
+            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
+        </div>
+        ";
 }
 
 ?>
@@ -63,38 +70,18 @@ if (isset($_SESSION['UAADHAR'])) {
                             href="upersonal.php">Personal Info</a>
                     </li>
 
-                    <!-- User & Courier Details-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Fair Price Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="uproductpage.php">
-                                    <img src="../Images/BuyProducts.png" style="width: 40px;" alt="Admin">
-                                    Buy Awesome Products
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="ucart.php">
-                                    <img src="../Images/AddToCart.png" style="width: 40px;" alt="Admin">
-                                    Check my Cart
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="uorderstatus.php">
-                                    <img src="../Images/OrderStatus.png" style="width: 40px;" alt="Admin">
-                                    Check my Order Status
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="uproductpage.php">Buy
+                            Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="uorderstatus.php">Order Status</a>
                     </li>
 
                     <!-- Contact Us -->
@@ -142,57 +129,96 @@ if (isset($_SESSION['UAADHAR'])) {
         ";
     }
     ?>
+    <!-- End of Personal Data -->
 
-    <!-- <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h5>Date : 2021-12-06</h5>
+    <!-- Ration Details -->
+    <p>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn personalDateButton shadow-none dropdown-toggle" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            2021-12-06
+        </button>
+    </div>
+    </p>
+
+    <div class="collapse" id="collapseExample">
+        <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h5>Date : 2021-12-06</h5>
+                </div>
+                <div class="col-md-4 text-center">
+                    <span class="badge rounded-pill bg-success">Successfully Delivered</span>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Reference Id : 18277269</h5>
+                </div>
+                <hr>
             </div>
-            <div class="col-md-6 text-center">
-                <h5>Reference Id : 18277269</h5>
+            <div class='row justify-content-center align-content-center'>
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Product ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">35457</th>
+                            <td>Wheat</td>
+                            <td>5 Kilogram</td>
+                            <td>₹ 40</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">34525</th>
+                            <td>Rice</td>
+                            <td>5 Kilogram</td>
+                            <td>₹ 20</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">37373</th>
+                            <td>Cooking Oil</td>
+                            <td>2 Litres</td>
+                            <td>₹ 100</td>
+                        </tr>
+                        <tr class="table-success">
+                            <th colspan="3">Grand Total Ammount</th>
+                            <td>₹ 160</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <hr>
         </div>
-        <div class='row justify-content-center align-content-center'>
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">35457</th>
-                        <td>Wheat</td>
-                        <td>5 Kilogram</td>
-                        <td>₹ 40</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">34525</th>
-                        <td>Rice</td>
-                        <td>5 Kilogram</td>
-                        <td>₹ 20</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">37373</th>
-                        <td>Cooking Oil</td>
-                        <td>2 Litres</td>
-                        <td>₹ 100</td>
-                    </tr>
-                    <tr class="table-success">
-                        <th colspan="3">Grand Total Ammount</th>
-                        <td>₹ 160</td>
-                    </tr>
-                </tbody>
-            </table>
+    </div>
+    <!-- End of Ration Details -->
+
+    <!-- Contact Us -->
+    <div class="modal fade" id="exampleModal" tabindex="3" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text" name="msgbody"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" name="send_msg">Send message</button>
+                </div>
+            </div>
         </div>
-    </div> -->
-
-
-    <!-- End of Personal -->
+    </div>
+    <!-- End of contact us -->
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
@@ -209,51 +235,6 @@ if (isset($_SESSION['UAADHAR'])) {
         </div>
     </div>
     <!-- End of Footer -->
-
-    <!-- <div class="container" style="max-width: 80%; background:chocolate">
-        <div class="row">
-            <div class="col">
-                <img src="https://img.icons8.com/bubbles/300/000000/user.png" />
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$fname} {$lname}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$dob}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$address}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$district}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{$email}</h4>
-                    </div>
-                    <div class="col text-center">
-                        <h4>{$phone}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- End of Personal Data -->
-
-
-    <!-- <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
-                dy=".3em">140x140</text>
-        </svg>
-    </div> -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
