@@ -1,0 +1,10 @@
+.container{
+    margin: 33px auto;
+    padding: 70px 249px;
+}
+body{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2b/Background_wallpaper_maple_leaves.jpg");
+}
+.subcontainer{
+    text-align: left;
+}

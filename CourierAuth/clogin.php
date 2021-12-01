@@ -163,7 +163,7 @@ if (isset($_POST['clogin_submit'])) {
     <!-- Log-In Form -->
     <div class="container-fluid" style="background-color: #F4ABAA; max-width: 100%; height:auto;">
         <div class="row justify-content-center align-items-center">
-            <form action="" name="myform" method="POST" class="col-md-4 myform" style="margin: 50px 0px 0px 0px;"
+            <form action="courierboydetails.php" name="myform" method="POST" class="col-md-4 myform" style="margin: 50px 0px 0px 0px;"
                 onsubmit="return validate()">
                 <h4 class="text-center">Courier Log-In</h4>
                 <hr>
