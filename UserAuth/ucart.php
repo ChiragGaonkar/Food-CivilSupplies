@@ -96,7 +96,7 @@ if (isset($_SESSION['UAADHAR'])) {
     <?php
     if (isset($_SESSION['UAADHAR'])) {
         $uaadhar = $_SESSION['UAADHAR'];
-        $sql1 = "SELECT * FROM product_data WHERE PID IN(SELECT PID FROM cart_data WHERE UAADHAR = $uaadhar)";
+        $sql1 = "SELECT product_data.PID,PNAME,QUANTITY,PTYPE,PRICE,CART_QUANTITY FROM product_data INNER JOIN cart_data ON product_data.PID = cart_data.PID WHERE UAADHAR = $uaadhar";
         $result1 = mysqli_query($connection, $sql1);
         echo "<div class='row d-flex justify-content-center outerproductcard'>";
         while ($row = mysqli_fetch_assoc($result1)) {
@@ -109,7 +109,7 @@ if (isset($_SESSION['UAADHAR'])) {
                     </div> -->
                     <!-- <div class='col-md-8'> -->
                     <div class='card-body'>
-                        <h2 class='text-center'>{$row['PNAME']}</h2>
+                        <h2 class='text-center'>{$row['PNAME']}({$row['CART_QUANTITY']} {$row['PTYPE']})</h2>
                         <hr>
                         <table class='table table-borderless'>
                             <tbody>
