@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 10px 30px 10px 30px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="home.php">
+            <a class="navbar-brand" href="index.html">
                 <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
@@ -38,7 +38,7 @@
                     <!-- Home -->
                     <li class="nav-item">
                         <a class="nav-link active " style="margin-right: 20px;" aria-current="page"
-                            href="home.php">Home</a>
+                            href="index.html">Home</a>
                     </li>
 
                     <!-- Log In -->

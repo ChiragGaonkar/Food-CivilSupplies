@@ -58,7 +58,7 @@ if (isset($_POST['clogin_submit'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="padding: 10px 30px 10px 30px">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../home.php">
+            <a class="navbar-brand" href="../index.html">
                 <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
@@ -76,7 +76,8 @@ if (isset($_POST['clogin_submit'])) {
                 <ul class="navbar-nav" style="margin-left: auto;">
                     <!-- Home -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="../home.php">Home</a>
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="../index.html">Home</a>
                     </li>
 
                     <!-- Log In -->
@@ -163,8 +164,8 @@ if (isset($_POST['clogin_submit'])) {
     <!-- Log-In Form -->
     <div class="container-fluid" style="background-color: #F4ABAA; max-width: 100%; height:auto;">
         <div class="row justify-content-center align-items-center">
-            <form action="courierboydetails.php" name="myform" method="POST" class="col-md-4 myform" style="margin: 50px 0px 0px 0px;"
-                onsubmit="return validate()">
+            <form action="courierboydetails.php" name="myform" method="POST" class="col-md-4 myform"
+                style="margin: 50px 0px 0px 0px;" onsubmit="return validate()">
                 <h4 class="text-center">Courier Log-In</h4>
                 <hr>
                 <div class="form-group row">

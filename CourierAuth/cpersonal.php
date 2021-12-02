@@ -7,21 +7,24 @@ error_reporting(0);
 <?php include 'courierboydetails.php' ?>
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="cdetailcontainer.css">
     <title>Courier</title>
-  </head>
-  <body>
-       <!-- Navbar -->
+</head>
+
+<body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="padding: 10px 30px 10px 30px">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../home.php">
+            <a class="navbar-brand" href="../index.html">
                 <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
@@ -39,7 +42,8 @@ error_reporting(0);
                 <ul class="navbar-nav" style="margin-left: auto;">
                     <!-- Home -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="../home.php">Orders</a>
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="../home.php">Orders</a>
                     </li>
 
                     <!-- Contact Us -->
@@ -59,29 +63,30 @@ error_reporting(0);
 
     <!-- container -->
     <div class="container">
-    <div class="card text-center">
-  <div class="card-header" style="background-color: rgb(110 94 94 / 27%); border-bottom: rgb(51 43 43 / 9%);">
-  <b>YOUR DETAILS</b>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"></h5>
-    <div class="subcontainer">
-        <p class="card-text"><strong>ID : </strong><?php echo $row['CID']; ?></p>
-        <p class="card-text"><strong>AADHAR NUMBER : </strong><?php echo $row['CAADHARNUM'];  ?></p>
-        <p class="card-text"><strong>FIRST NAME : </strong><?php echo $row['CFNAME']; ?></p>
-        <p class="card-text"><strong>LAST NAME : </strong><?php echo $row['CLNAME']; ?></p>
-        <p class="card-text"><strong>EMAIL ID : </strong><?php echo $row['CEMAIL']; ?></p>
-        <p class="card-text"><strong>DISTRICT : </strong><?php echo $row['CDISTRICT']; ?></p>
+        <div class="card text-center">
+            <div class="card-header" style="background-color: rgb(110 94 94 / 27%); border-bottom: rgb(51 43 43 / 9%);">
+                <b>YOUR DETAILS</b>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <div class="subcontainer">
+                    <p class="card-text"><strong>ID : </strong><?php echo $row['CID']; ?></p>
+                    <p class="card-text"><strong>AADHAR NUMBER : </strong><?php echo $row['CAADHARNUM'];  ?></p>
+                    <p class="card-text"><strong>FIRST NAME : </strong><?php echo $row['CFNAME']; ?></p>
+                    <p class="card-text"><strong>LAST NAME : </strong><?php echo $row['CLNAME']; ?></p>
+                    <p class="card-text"><strong>EMAIL ID : </strong><?php echo $row['CEMAIL']; ?></p>
+                    <p class="card-text"><strong>DISTRICT : </strong><?php echo $row['CDISTRICT']; ?></p>
+                </div>
+
+            </div>
+            <div class="card-footer text-muted"
+                style="background-color: rgb(110 94 94 / 27%); border-top: rgb(51 43 43 / 9%);">
+                FOOD AND CIVIL SUPPLIES
+            </div>
+        </div>
     </div>
-    
-  </div>
-  <div class="card-footer text-muted" style="background-color: rgb(110 94 94 / 27%); border-top: rgb(51 43 43 / 9%);">
-  FOOD AND CIVIL SUPPLIES
-  </div>
-</div>
-</div>
-</div>
-<!-- End of Container -->
+    </div>
+    <!-- End of Container -->
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center">
@@ -102,12 +107,15 @@ error_reporting(0);
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-  </body>
+</body>
+
 </html>
