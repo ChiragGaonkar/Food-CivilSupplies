@@ -24,7 +24,7 @@ error_reporting(0);
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="padding: 10px 30px 10px 30px">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="../index.php">
                 <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
                 <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
@@ -43,7 +43,7 @@ error_reporting(0);
                     <!-- Home -->
                     <li class="nav-item">
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page"
-                            href="../home.php">Orders</a>
+                            href="../index.php">Orders</a>
                     </li>
 
                     <!-- Contact Us -->
