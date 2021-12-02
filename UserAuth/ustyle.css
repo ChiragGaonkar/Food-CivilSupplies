@@ -84,3 +84,16 @@ body {
   color: #fdf5df;
   border: #fdf5df;
 }
+
+.cartcard {
+  max-width: 100%;
+  background-color: #fdf5df;
+  color: #f92c85;
+  transition-duration: 0.4s;
+}
+
+.cartcard:hover {
+  background-color: #f92c85;
+  color: #fdf5df;
+  transition-duration: 0.4s;
+}

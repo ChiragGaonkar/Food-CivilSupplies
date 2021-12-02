@@ -102,7 +102,7 @@ if (isset($_SESSION['UAADHAR'])) {
         while ($row = mysqli_fetch_assoc($result1)) {
             echo "
         <div class='col-md-6'>
-            <div class='card mb-3 mt-auto' style='max-width: 100%;background-color: #fdf5df;'>
+            <div class='card mb-3 mt-auto cartcard'>
                 <div class='row g-0'>
                     <!-- <div class='col-md-4'>
                         <img src='../Images/Wheat.jpg' class='img-fluid rounded-start' alt='...'>
