@@ -220,7 +220,7 @@ if (isset($_POST['ureg_submit'])) {
                     </div>
                     <div class="input-group inputs" style="width: auto;">
                         <span class="input-group-text" style="width: 160px;">District</span>
-                        <select class="form-select" id="inputGroupSelect01" style="width: 206px;" name="UDISTRICT">
+                        <select class="form-select" id="inputGroupSelect01" style="width: 242px;" name="UDISTRICT">
                             <option value="North-Goa" name="UDISTRICT">North Goa</option>
                             <option value="South-Goa" name="UDISTRICT">South Goa</option>
                         </select>
@@ -239,11 +239,11 @@ if (isset($_POST['ureg_submit'])) {
                 <div class="form-group row">
                     <div class="input-group inputs" style="width: auto;">
                         <span class="input-group-text" style="width: 160px;">Birth Date</span>
-                        <input type="date" class="form-control" name="UDOB" style="width: 206px;" required>
+                        <input type="date" class="form-control" name="UDOB" style="width: 242px;" required>
                     </div>
                     <div class=" input-group inputs" style="width: auto;">
                         <span class="input-group-text" style="width: 160px;">Gender</span>
-                        <select class="form-select" id="inputGroupSelect01" style="width: 206px;" name="UGENDER">
+                        <select class="form-select" id="inputGroupSelect01" style="width: 242px;" name="UGENDER">
                             <option value="Male" name="UGENDER">Male</option>
                             <option value="Female" name="UGENDER">Female</option>
                             <option value="Others" name="UGENDER">Others</option>
@@ -276,9 +276,9 @@ if (isset($_POST['ureg_submit'])) {
                 </h6>
             </form>
         </div>
-        <div class=" row">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,32L11.4,58.7C22.9,85,46,139,69,170.7C91.4,203,
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="background-color:#fdf5df ;">
+        <path fill="#f92c85" fill-opacity="1" d="M0,32L11.4,58.7C22.9,85,46,139,69,170.7C91.4,203,
                     114,213,137,192C160,171,183,117,206,112C228.6,107,251,
                     149,274,165.3C297.1,181,320,171,343,144C365.7,117,389,75,
                     411,53.3C434.3,32,457,32,480,42.7C502.9,53,526,75,549,
@@ -296,10 +296,8 @@ if (isset($_POST['ureg_submit'])) {
                     ,320,480,320C457.1,320,434,320,411,320C388.6,320,366,320,343,320C320,320,297,
                     320,274,320C251.4,320,229,320,206,320C182.9,320,160,320,137,320C114.3,320,91,
                     320,69,320C45.7,320,23,320,11,320L0,320Z">
-                </path>
-            </svg>
-        </div>
-    </div>
+        </path>
+    </svg>
     <!-- End of Registration Form -->
 
     <!-- Footer -->

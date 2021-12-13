@@ -3,19 +3,47 @@ include "../config.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION['UAADHAR'])) {
-    if (isset($_POST['uremoveproduct'])) {
-        $pid = $_POST['uremoveproduct'];
-        $uaadhar = $_SESSION['UAADHAR'];
-        $sql = "DELETE FROM cart_data WHERE PID = $pid  AND UAADHAR = $uaadhar";
-        $result = mysqli_query($connection, $sql);
-        if ($result) {
-            header('location:ucart.php');
-            return;
-        } else {
-        }
+    $totalPrice = 0;
+    $aadhar = $_SESSION['UAADHAR'];
+    $sql4 = "SELECT product_data.PNAME,product_data.PRICE,cart_data.CART_QUANTITY 
+            FROM product_data
+            INNER JOIN cart_data
+            ON product_data.PID = cart_data.PID
+            WHERE cart_data.UAADHAR = $aadhar";
+    $result4 = mysqli_query($connection, $sql4);
+    while ($row = mysqli_fetch_assoc($result4)) {
+        $totalPrice += $row['CART_QUANTITY'] * $row['PRICE'];
     }
-    if (isset($_POST['buyproduct'])) {
-        header('location:upay.php');
+
+    if (isset($_POST['paybtn'])) {
+        $found = true;
+        do {
+            $referenceid = rand(10000, 99999);
+            $sql0 = "SELECT * FROM payment_data WHERE REFERENCEID = $referenceid";
+            $result0 = mysqli_query($connection, $sql0);
+            if (!mysqli_num_rows($result0) > 0) {
+                $found = false;
+            }
+        } while ($found);
+
+        if ($_POST['payment'] == "cashOnDelivery") {
+            if ($totalPrice > 0) {
+                $sql5 = "INSERT INTO payment_data(REFERENCEID,TOTALPRICE) VALUES($referenceid,$totalPrice)";
+                $result5 = mysqli_query($connection, $sql5);
+            }
+
+            $sql1 = "SELECT * FROM cart_data WHERE UAADHAR = $aadhar";
+            $result1 = mysqli_query($connection, $sql1);
+            while ($row = mysqli_fetch_assoc($result1)) {
+                $sql2 = "INSERT INTO order_data(REFERENCEID,COID,STATUS,PAYMENT) VALUES ($referenceid, {$row['COID']},'Placed','UnPaid')";
+                $result2 = mysqli_query($connection, $sql2);
+                if ($result2) {
+                    $sql3 = "DELETE FROM cart_data WHERE COID = {$row['COID']}";
+                    $result3 = mysqli_query($connection, $sql3);
+                }
+            }
+            header('location:upersonal.php');
+        }
     }
 }
 ?>
@@ -35,7 +63,7 @@ if (isset($_SESSION['UAADHAR'])) {
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
     </style>
-    <title>Cart</title>
+    <title>Payment</title>
 </head>
 
 <body>
@@ -70,7 +98,7 @@ if (isset($_SESSION['UAADHAR'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page" href="ucart.php">My
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My
                             Cart</a>
                     </li>
 
@@ -95,83 +123,49 @@ if (isset($_SESSION['UAADHAR'])) {
     </nav>
     <!-- End of Navbar -->
 
-    <!-- Products which are added in Cart -->
-    <?php
-    if (isset($_SESSION['UAADHAR'])) {
-        $uaadhar = $_SESSION['UAADHAR'];
-        $sql1 = "SELECT product_data.PID,PNAME,QUANTITY,PTYPE,PRICE,CART_QUANTITY FROM product_data INNER JOIN cart_data ON product_data.PID = cart_data.PID WHERE UAADHAR = $uaadhar";
-        $result1 = mysqli_query($connection, $sql1);
-        if (mysqli_num_rows($result1) > 0) {
-            echo "<div class='row d-flex justify-content-center outerproductcard'>";
-            while ($row = mysqli_fetch_assoc($result1)) {
-                echo "
-                    <div class='col-md-6'>
-                        <div class='card mb-3 mt-auto cartcard'>
-                            <div class='row g-0'>
-                            <!-- <div class='col-md-4'>
-                                <img src='../Images/Wheat.jpg' class='img-fluid rounded-start' alt='...'>
-                            </div> -->
-                            <!-- <div class='col-md-8'> -->
-                            <div class='card-body'>
-                                <h2 class='text-center'>{$row['PNAME']}({$row['CART_QUANTITY']} {$row['PTYPE']})</h2>
-                                <hr>
-                                <table class='table table-borderless'>
-                                    <tbody>
-                                        <tr>
-                                            <th class='text-start'>Product ID</th>
-                                            <th class='text-end'>{$row['PID']}</th>
-                                        </tr>
-                                        <tr>
-                                            <th class='text-start'>Quantity</th>
-                                            <th class='text-end'>{$row['QUANTITY']} {$row['PTYPE']}</th>
-                                        </tr>
-                                        <tr>
-                                            <th class='text-start'>Price</th>
-                                            <th class='text-end'>₹ {$row['PRICE']}</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <form method='POST'>
-                                <div class='d-grid gap-2'>
-                                    <button class='btn btn-success shadow-none' type='submit' name='uremoveproduct' value={$row['PID']}
-                                        style='background-color: #F92C85; border:#F92C85; color:#fdf5df'>Remove from Cart</button>
-                                </div>
-                                </form>
-                            </div>
-                            <!-- </div> -->
-                        </div>
-                        </div>
-                    </div>
-                    ";
-            }
-            echo "</div>";
-        } else {
-            echo "
+    <!-- Payment -->
+    <div class="container-fluid">
+        <h1 class="text-center" style="color: #f92c85;">Great, that's <?php echo "₹{$totalPrice}"; ?>/-</h1>
+        <form action="" method="POST">
+            <div class="mx-auto paycontainer">
+                <br>
                 <div>
-                    <img src='../Images/Empty.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
+                    <input class="form-check-input" type="radio" name="payment" value="cashOnDelivery" checked>
+                    <label class="form-check-label" for="cashOnDelivery">
+                        Cash On Delivery
+                    </label>
                 </div>
-            ";
-        }
-    } else {
-        echo "
-        <div>
-            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
-        </div>
-        ";
-    }
-
-    $sql1 = "SELECT * FROM cart_data WHERE UAADHAR = {$_SESSION['UAADHAR']}";
-    $result1 = mysqli_query($connection, $sql1);
-    if (mysqli_num_rows($result1) > 0) {
-        echo "<form method='POST'>
-                <div class='d-grid gap-2 mx-auto ' style='width: 90%;'>
-                    <button class='btn shadow-none personalDateButton' type='submit' name='buyproduct'>
-                        Buy my Products</button>
+                <br>
+                <div>
+                    <input class="form-check-input" type="radio" name="payment" value="creditDebit" disabled>
+                    <label class="form-check-label" for="creditDebit">
+                        Credit/Debit Card
+                    </label>
                 </div>
-            </form>";
-    }
-    ?>
-    <!-- End of Products which are added in cart -->
+                <br>
+                <div>
+                    <input class="form-check-input" type="radio" name="payment" value="paypal" disabled>
+                    <label class="form-check-label" for="paypal">
+                        PayPal
+                    </label>
+                </div>
+                <br>
+                <div>
+                    <input class="form-check-input" type="radio" name="payment" value="bankTransfer" disabled>
+                    <label class="form-check-label" for="bankTransfer">
+                        Bank Transfer
+                    </label>
+                </div>
+                <br>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn shadow-none" type="submit" name="paybtn"
+                    style="background-color:#f92c85; border:#f92c85">Buy
+                    Now</button>
+            </div>
+        </form>
+    </div>
+    <!-- End of payment -->
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">

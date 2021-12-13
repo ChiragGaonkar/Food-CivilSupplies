@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="commonstyle.css">
 
     <title>Home Page</title>
 </head>
@@ -121,6 +121,60 @@
         </div>
     </nav>
     <!-- End of Navbar -->
+
+    <!-- Front Page -->
+    <div class="container-fluid" style="background-color: #697bdf;">
+        <div class="row row-cols-1 row-cols-md-2  myfont1" style="height:100vh">
+            <div class="col" style="max-height:0px">
+                <img src="Images/Front.jpeg" alt="" class="img-fluid float-center">
+            </div>
+            <div class="col" style="height: 0px;margin-top:50px;">
+                <h1 class="text-center">Food & Civil Supplies</h1>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis libero quod
+                    quis neque ratione non
+                    eveniet temporibus quasi dolores iusto quia obcaecati laborum vel perferendis dolor, ad repellat
+                    praesentium nemo!</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="button"
+                        style="background-color: #f9e37a;border:#f9e37a;color:black;outline:none;box-shadow: none;">New
+                        Scheme</button>
+                    <button class="btn btn-primary" type="button"
+                        style="background-color: #f99b55;border:#f99b55;color:black;outline:none;box-shadow: none;">
+                        Customer
+                        Feedback</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: tomato;">
+        <div style="height:100vh">
+            <h1>New Scheme</h1>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: green;">
+        <div style="height:100vh">
+            <h1>Customer Feedback</h1>
+        </div>
+    </div>
+
+    <!-- End of Front Page -->
+
+    <!-- Footer -->
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">Department of Goa</p>
+                <hr>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/instagram-new.png" /></a>
+                <a href="#" class="fs-5 mb-4" style="margin-right: 20px; margin-left: 20px;"><img
+                        src="https://img.icons8.com/nolan/64/twitter.png" /></a>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/whatsapp.png" /></a>
+            </div>
+        </div>
+    </div>
+    <!-- End of Footer -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 

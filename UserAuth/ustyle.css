@@ -1,5 +1,6 @@
 body {
   background: #1d1d2c;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .myform {
   border: 0px solid;
@@ -8,7 +9,6 @@ body {
   border-radius: 8px;
   /* background-image: linear-gradient(to bottom right, #5ebec4, white); */
   background-color: #5ebec4;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
 }
 
 .inputs {
@@ -96,4 +96,16 @@ body {
   background-color: #f92c85;
   color: #fdf5df;
   transition-duration: 0.4s;
+}
+
+.paycontainer {
+  background-color: #1e2148;
+  max-width: 750px;
+  height: 300px;
+  margin: 20px 0px 20px 0px;
+  border-radius: 10px;
+  color: white;
+  padding-top: 50px;
+  padding-left: 20px;
+  transition-duration: 2s;
 }

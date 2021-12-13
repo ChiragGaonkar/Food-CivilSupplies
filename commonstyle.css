@@ -1,0 +1,14 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.heading {
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}

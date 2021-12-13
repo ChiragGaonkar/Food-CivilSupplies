@@ -197,9 +197,9 @@ if (isset($_POST['ureg_otp'])) {
                 </div>
             </form>
         </div>
-        <div class=" row">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,128L17.1,106.7C34.3,85,69,43,103,69.3C137.1,
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="background-color: #fdf5df;">
+        <path fill="#f92c85" fill-opacity="1" d="M0,128L17.1,106.7C34.3,85,69,43,103,69.3C137.1,
                     96,171,192,206,197.3C240,203,274,117,309,106.7C342.9
                     ,96,377,160,411,160C445.7,160,480,96,514,64C548.6,
                     32,583,32,617,32C651.4,32,686,32,720,37.3C754.3,43
@@ -214,10 +214,8 @@ if (isset($_POST['ureg_otp'])) {
                     320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,
                     320C274.3,320,240,320,206,320C171.4,320,137,320,103,
                     320C68.6,320,34,320,17,320L0,320Z">
-                </path>
-            </svg>
-        </div>
-    </div>
+        </path>
+    </svg>
     <!-- End of Registration Form -->
 
     <!-- Footer -->
