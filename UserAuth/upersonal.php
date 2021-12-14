@@ -132,6 +132,13 @@ if (isset($_SESSION['UAADHAR'])) {
     <!-- End of Personal Data -->
 
     <!-- Ration Details -->
+    <?php
+    if (isset($_SESSION['UAADHAR'])) {
+        $aadhar = $_SESSION['UAADHAR'];
+        $sql0 = "SELECT * FROM order_data WHERE UAADHAR = $aadhar";
+        $result0 = mysqli_query($connection, $sql0);
+    }
+    ?>
     <p>
     <div class="d-grid gap-2 col-6 mx-auto">
         <button class="btn personalDateButton shadow-none dropdown-toggle" type="button" data-bs-toggle="collapse"

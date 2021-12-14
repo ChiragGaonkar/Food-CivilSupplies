@@ -2,17 +2,20 @@
 include "../config.php";
 session_start();
 error_reporting(0);
-$aid = $_SESSION['AID'];
-$sql = "SELECT * FROM admin_data WHERE AID = $aid";
-$result = mysqli_query($connection, $sql);
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-    $afname = $row['AFNAME'];
-    $alname = $row['ALNAME'];
-    $adistrict = $row['ADISTRICT'];
+if (isset($_SESSION['AID'])) {
+    $aid = $_SESSION['AID'];
+    $sql = "SELECT * FROM admin_data WHERE AID = $aid";
+    $result = mysqli_query($connection, $sql);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $afname = $row['AFNAME'];
+        $alname = $row['ALNAME'];
+        $adistrict = $row['ADISTRICT'];
+        $aemail = $row['AEMAIL'];
+        $addhar = $row['AAADHARNUM'];
+    }
+} else {
 }
-
-
 ?>
 
 <!doctype html>
@@ -58,6 +61,16 @@ if ($result) {
                             href="apersonal.php">Personal Info</a>
                     </li>
 
+                    <!-- Ration Info -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="#">Ration</a>
+                    </li>
+
+                    <!-- Sales Info -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="#">Sales</a>
+                    </li>
+
                     <!-- User & Courier Details-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
@@ -98,23 +111,35 @@ if ($result) {
         </div>
     </nav>
     <!-- End of Navbar -->
+
+    <!-- Personal Info -->
     <?php
     if (isset($_SESSION['AID'])) {
-        echo "<h1>Personal Info</h1>";
-        echo "<h2>Admin Id : {$aid}</h2>";
-        echo "<h2>Name : {$afname} {$alname}</h2>";
-        echo "<h2>District : {$adistrict}</h2>";
-    } else {
         echo "
-        <div>
+     <div class='container personalContainer' style='background-color:#8aa899;height:auto;'>
+     <div class='row justify-content-center align-items-center'>
+         <img src='../Images/Admin.png' class='col-md-4 img-fluid personal-img'
+             style='margin: 40px 0px 40px 0px; width:300px'>
+         <div class='col-md-4 text-start personaldivinfo'>
+             <h4>Name : {$afname} {$alname}</h4>
+             <h4>Aadhar Number : {$addhar}</h4>
+             <h4>District : {$adistrict}</h4>
+             <h4>Email : {$aemail}</h4>
+         </div>
+     </div>
+    </div>
+     ";
+    } else {
+        echo " <div>
             <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
         </div>
         ";
     }
     ?>
+    <!-- End of Personal Info -->
 
     <!-- Footer -->
-    <div class="bg-dark text-secondary px-4 py-5 text-center">
+    <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
             <div class="col-lg-6 mx-auto">

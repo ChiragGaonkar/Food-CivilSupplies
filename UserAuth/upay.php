@@ -35,7 +35,7 @@ if (isset($_SESSION['UAADHAR'])) {
             $sql1 = "SELECT * FROM cart_data WHERE UAADHAR = $aadhar";
             $result1 = mysqli_query($connection, $sql1);
             while ($row = mysqli_fetch_assoc($result1)) {
-                $sql2 = "INSERT INTO order_data(REFERENCEID,COID,STATUS,PAYMENT) VALUES ($referenceid, {$row['COID']},'Placed','UnPaid')";
+                $sql2 = "INSERT INTO order_data(REFERENCEID,PID,UAADHAR,STATUS,PAYMENT) VALUES ($referenceid, {$row['PID']},{$row['UAADHAR']},'Placed','UnPaid')";
                 $result2 = mysqli_query($connection, $sql2);
                 if ($result2) {
                     $sql3 = "DELETE FROM cart_data WHERE COID = {$row['COID']}";

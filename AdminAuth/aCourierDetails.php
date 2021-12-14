@@ -48,6 +48,16 @@ $aid = $_SESSION['AID'];
                             href="apersonal.php">Personal Info</a>
                     </li>
 
+                    <!-- Ration Info -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="#">Ration</a>
+                    </li>
+
+                    <!-- Sales Info -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="#">Sales</a>
+                    </li>
+
                     <!-- User & Courier Details-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" style="margin-right: 10px;" href="#"
