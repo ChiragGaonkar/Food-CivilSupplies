@@ -1,3 +1,8 @@
+body {
+  background: #1d1d2c;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .myform {
   border: 0px solid;
   width: auto;
@@ -10,4 +15,22 @@
 
 .inputs {
   margin-top: 5px;
+}
+
+.personalContainer {
+  max-width: 80%;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.personaldivinfo {
+  background: #fa2742;
+  padding: 40px;
+  margin: 40px;
+  border-radius: 20px;
+  width: 700px;
+  overflow-wrap: break-word;
+  font-family: "Cabin", sans-serif;
+  color: #cae7df;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
 }

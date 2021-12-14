@@ -116,7 +116,7 @@ if (isset($_SESSION['AID'])) {
     <?php
     if (isset($_SESSION['AID'])) {
         echo "
-     <div class='container personalContainer' style='background-color:#8aa899;height:auto;'>
+     <div class='container personalContainer' style='background-color:#5c6e58;height:auto;'>
      <div class='row justify-content-center align-items-center'>
          <img src='../Images/Admin.png' class='col-md-4 img-fluid personal-img'
              style='margin: 40px 0px 40px 0px; width:300px'>

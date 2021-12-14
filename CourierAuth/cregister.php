@@ -218,7 +218,7 @@ if (isset($_POST['creg_submit'])) {
                     </div>
                     <div class="input-group inputs" style="width: auto;">
                         <span class="input-group-text" style="width: 160px;">District</span>
-                        <select class="form-select" id="inputGroupSelect01" style="width: 206px;" name="CDISTRICT">
+                        <select class="form-select" id="inputGroupSelect01" style="width: 242px;" name="CDISTRICT">
                             <option value="North-Goa" name="CDISTRICT">North Goa</option>
                             <option value="South-Goa" name="CDISTRICT">South Goa</option>
                         </select>

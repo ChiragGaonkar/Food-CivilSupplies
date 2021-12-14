@@ -1,7 +1,20 @@
 <?php
+include "../config.php";
 session_start();
 error_reporting(0);
-
+if (isset($_SESSION['cid'])) {
+    $cid = $_SESSION['cid'];
+    $sql = "SELECT * FROM courier_data  WHERE CID = $cid";
+    $result = mysqli_query($connection, $sql);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $fname = $row['CFNAME'];
+        $lname = $row['CLNAME'];
+        $district = $row['CDISTRICT'];
+        $email = $row['CEMAIL'];
+        $addhar = $row['CAADHARNUM'];
+    }
+}
 ?>
 
 <!doctype html>
@@ -16,9 +29,7 @@ error_reporting(0);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <?php include 'courierboydetails.php'; ?>
-
-    <link rel="stylesheet" href="cdetailcontainers.css">
+    <link rel="stylesheet" href="cstyle.css">
     <title>Courier</title>
 </head>
 
@@ -44,6 +55,13 @@ error_reporting(0);
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav" style="margin-left: auto;">
+
+                    <!-- Personal Info -->
+                    <li class="nav-item">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                            href="cpersonal.php">Personal Info</a>
+                    </li>
+
                     <!-- Orders -->
                     <li class="nav-item">
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page"
@@ -65,36 +83,35 @@ error_reporting(0);
     </nav>
     <!-- End of Navbar -->
 
-   
-    <!-- container -->
-    <div class="container">
-        <div class="card text-center">
-            <div class="card-header" style="background-color: rgb(110 94 94 / 27%); border-bottom: rgb(51 43 43 / 9%);">
-                <b>YOUR DETAILS</b>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"></h5>
-                <div class="subcontainer">
-                    <p class="card-text"><strong>ID : </strong><?php echo $row['CID']; ?></p>
-                    <p class="card-text"><strong>AADHAR NUMBER : </strong><?php echo $row['CAADHARNUM'];  ?></p>
-                    <p class="card-text"><strong>FIRST NAME : </strong><?php echo $row['CFNAME']; ?></p>
-                    <p class="card-text"><strong>LAST NAME : </strong><?php echo $row['CLNAME']; ?></p>
-                    <p class="card-text"><strong>EMAIL ID : </strong><?php echo $row['CEMAIL']; ?></p>
-                    <p class="card-text"><strong>DISTRICT : </strong><?php echo $row['CDISTRICT']; ?></p>
-                </div>
 
-            </div>
-            <div class="card-footer text-muted"
-                style="background-color: rgb(110 94 94 / 27%); border-top: rgb(51 43 43 / 9%);">
-                FOOD AND CIVIL SUPPLIES
-            </div>
+    <!-- Personal Info -->
+    <?php
+    if (isset($_SESSION['cid'])) {
+        echo "
+     <div class='container personalContainer' style='background-color:#cae7df;height:auto;'>
+     <div class='row justify-content-center align-items-center'>
+         <img src='../Images/Deliver.png' class='col-md-4 img-fluid personal-img'
+             style='margin: 40px 0px 40px 0px; width:300px'>
+         <div class='col-md-4 text-start personaldivinfo'>
+             <h4>Name : {$fname} {$lname}</h4>
+             <h4>Aadhar Number : {$addhar}</h4>
+             <h4>District : {$district}</h4>
+             <h4>Email : {$email}</h4>
+         </div>
+     </div>
+    </div>
+     ";
+    } else {
+        echo " <div>
+            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
         </div>
-    </div>
-    </div>
-    <!-- End of Container -->
+        ";
+    }
+    ?>
+    <!-- End of Personal Info -->
 
     <!-- Footer -->
-    <div class="bg-dark text-secondary px-4 py-5 text-center">
+    <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
             <div class="col-lg-6 mx-auto">

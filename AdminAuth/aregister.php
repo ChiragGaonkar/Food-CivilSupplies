@@ -217,7 +217,7 @@ if (isset($_POST['areg_submit'])) {
                     </div>
                     <div class="input-group inputs" style="width: auto;">
                         <span class="input-group-text" style="width: 160px;">District</span>
-                        <select class="form-select" id="inputGroupSelect01" style="width: 206px;" name="ADISTRICT">
+                        <select class="form-select" id="inputGroupSelect01" style="width: 242px;" name="ADISTRICT">
                             <option value="North-Goa" name="ADISTRICT">North Goa</option>
                             <option value="South-Goa" name="ADISTRICT">South Goa</option>
                         </select>

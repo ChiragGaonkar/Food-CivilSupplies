@@ -5,12 +5,12 @@ error_reporting(0);
 if (isset($_POST['clogin_submit'])) {
     $cid = $_POST['CID'];
     $cpassword = md5($_POST['CPASSWORD']);
+    echo "<script>alert($cpassword)</script>";
     $sql = "SELECT * FROM courier_data WHERE CID = $cid AND CPASSWORD = '$cpassword'";
     $result = mysqli_query($connection, $sql);
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $_SESSION['fname'] = $row['CFNAME'];
-        $_SESSION['lname'] = $row['CLNAME'];
+        $_SESSION['cid'] = $row['CID'];
         header("refresh:5;url=cpersonal.php");
         echo "<div class='alert alert-success alert-dismissible fade show' role='alert'
             style='max-width: 70%; position: absolute; top: 10%;' >
@@ -163,8 +163,8 @@ if (isset($_POST['clogin_submit'])) {
     <!-- Log-In Form -->
     <div class="container-fluid" style="background-color: #F4ABAA; max-width: 100%; height:auto;">
         <div class="row justify-content-center align-items-center">
-            <form action="cpersonal.php" name="myform" method="POST" class="col-md-4 myform"
-                style="margin: 50px 0px 0px 0px;" onsubmit="return validate()">
+            <form name="myform" method="POST" class="col-md-4 myform" style="margin: 50px 0px 0px 0px;"
+                onsubmit="return validate()">
                 <h4 class="text-center">Courier Log-In</h4>
                 <hr>
                 <div class="form-group row">
