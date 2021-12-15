@@ -16,6 +16,24 @@ if (isset($_SESSION['UAADHAR'])) {
     $phone = $row['UPHONE'];
     $aadhar = $row['UAADHAR'];
     $gender = $row['UGENDER'];
+
+    if ($_POST['cancelbtn']) {
+        $sql4 = "SELECT STATUS FROM payment_data WHERE REFERENCEID = {$_POST['cancelbtn']}";
+        $result4 = mysqli_query($connection, $sql4);
+        $row = mysqli_fetch_assoc($result4);
+        $sql2 = "DELETE FROM order_data WHERE REFERENCEID = {$_POST['cancelbtn']}";
+        $result2 = mysqli_query($connection, $sql2);
+        if ($result2) {
+            $sql3 = "DELETE FROM payment_data WHERE REFERENCEID = {$_POST['cancelbtn']}";
+            $result3 = mysqli_query($connection, $sql3);
+            if (!$result3) {
+                echo "<script>alert('Cant Cancel this Order')</script>";
+            }
+        } else {
+            echo "<script>alert('Cant Cancel this Order')</script>";
+        }
+        header('location:upersonal.php');
+    }
 } else {
     echo "
         <div>
@@ -135,71 +153,102 @@ if (isset($_SESSION['UAADHAR'])) {
     <?php
     if (isset($_SESSION['UAADHAR'])) {
         $aadhar = $_SESSION['UAADHAR'];
-        $sql0 = "SELECT * FROM order_data WHERE UAADHAR = $aadhar";
+        $sql0 = "SELECT * FROM payment_data WHERE UAADHAR = $aadhar ORDER BY PAYMENTDATE";
         $result0 = mysqli_query($connection, $sql0);
-    }
-    ?>
-    <p>
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn personalDateButton shadow-none dropdown-toggle" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            2021-12-06
-        </button>
-    </div>
-    </p>
-
-    <div class="collapse" id="collapseExample">
-        <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <h5>Date : 2021-12-06</h5>
-                </div>
-                <div class="col-md-4 text-center">
-                    <span class="badge rounded-pill bg-success">Successfully Delivered</span>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h5>Reference Id : 18277269</h5>
-                </div>
-                <hr>
+        while ($row0 = mysqli_fetch_assoc($result0)) {
+            $orderdate = $row0['PAYMENTDATE'];
+            $referenceid = $row0['REFERENCEID'];
+            echo "
+            <p>
+            <div class='d-grid gap-2 col-6 mx-auto float-center'>
+                <button class='btn personalDateButton shadow-none dropdown-toggle' type='button' data-bs-toggle='collapse'
+                    data-bs-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
+                    Order Date : $orderdate
+                </button>
             </div>
-            <div class='row justify-content-center align-content-center'>
-                <table class="table table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">Product ID</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price</th>
-                        </tr>
-                    </thead>
+            </p>
+
+            <div class='collapse' id='collapseExample'>
+            <div class='container myRationList' style='background-color:#FDF5DF;height:auto;'>
+                <div class='row'>
+                    <div class='col-md-4 text-center'>
+                        <h5>Date : $orderdate</h5>
+                    </div>";
+
+            if ($row0['STATUS'] == 'Placed') {
+                echo "<div class='col-md-4 text-center'>
+                    <span class='badge rounded-pill bg-success'>Order has been Placed</span>
+                </div>";
+            } else if ($row0['STATUS'] == 'Shipped') {
+                echo "<div class='col-md-4 text-center'>
+                    <span class='badge rounded-pill bg-success'>Order has been Shipped</span>
+                </div>";
+            } else if ($row0['STATUS'] == 'Delivered') {
+                echo "<div class='col-md-4 text-center'>
+                    <span class='badge rounded-pill bg-success'>Sucessfully Delivered</span>
+                </div>";
+            }
+
+            echo "
+                    <div class='col-md-4 text-center'>
+                        <h5>Reference Id : $referenceid</h5>
+                    </div>
+                    <hr>
+                </div>
+                <div class='row justify-content-center align-content-center'>
+                    <table class='table table-hover'>
+                        <thead class='table-dark'>
+                            <tr>
+                                <th scope='col'>Product ID</th>
+                                <th scope='col'>Product Name</th>
+                                <th scope='col'>Quantity</th>
+                                <th scope='col'>Price</th>
+                            </tr>
+                        </thead>
+        ";
+
+            $sql1 = "SELECT * FROM order_data INNER JOIN product_data ON order_data.PID = product_data.PID WHERE REFERENCEID = $referenceid";
+            $result1 = mysqli_query($connection, $sql1);
+            while ($row1 = mysqli_fetch_assoc($result1)) {
+                echo "
                     <tbody>
                         <tr>
-                            <th scope="row">35457</th>
-                            <td>Wheat</td>
-                            <td>5 Kilogram</td>
-                            <td>₹ 40</td>
+                            <th scope='row'>{$row1['PID']}</th>
+                            <td>{$row1['PNAME']}</td>
+                            <td>{$row1['PRODUCT_QUANTITY']} {$row1['PTYPE']}</td>
+                            <td>₹ {$row1['PRICE']}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">34525</th>
-                            <td>Rice</td>
-                            <td>5 Kilogram</td>
-                            <td>₹ 20</td>
+                ";
+            }
+
+            echo "
+                        <tr class='table-success'>
+                        <th colspan='3'>Grand Total Ammount</th>
+                        <td>₹ {$row0['TOTALPRICE']}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">37373</th>
-                            <td>Cooking Oil</td>
-                            <td>2 Litres</td>
-                            <td>₹ 100</td>
-                        </tr>
-                        <tr class="table-success">
-                            <th colspan="3">Grand Total Ammount</th>
-                            <td>₹ 160</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                        </table> ";
+
+            if ($row0['STATUS'] != 'Delivered')
+                echo "
+                <form method='POST'>
+                    <div class='d-grid gap-2'>
+                        <button class='btn shadow-none' type='submit' name='cancelbtn' value='$referenceid' 
+                        style='background-color:#f92c85; border:#f92c85'>
+                        Cancel Order
+                        </button>
+                    </div>
+                </form>
+            ";
+
+            echo "
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            ";
+        }
+    }
+    ?>
     <!-- End of Ration Details -->
 
     <!-- Contact Us -->

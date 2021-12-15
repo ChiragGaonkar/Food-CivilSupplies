@@ -27,20 +27,22 @@ if (isset($_SESSION['UAADHAR'])) {
         } while ($found);
 
         if ($_POST['payment'] == "cashOnDelivery") {
-            if ($totalPrice > 0) {
-                $sql5 = "INSERT INTO payment_data(REFERENCEID,TOTALPRICE) VALUES($referenceid,$totalPrice)";
-                $result5 = mysqli_query($connection, $sql5);
-            }
-
             $sql1 = "SELECT * FROM cart_data WHERE UAADHAR = $aadhar";
             $result1 = mysqli_query($connection, $sql1);
             while ($row = mysqli_fetch_assoc($result1)) {
-                $sql2 = "INSERT INTO order_data(REFERENCEID,PID,UAADHAR,STATUS,PAYMENT) VALUES ($referenceid, {$row['PID']},{$row['UAADHAR']},'Placed','UnPaid')";
+                $sql2 = "INSERT INTO order_data(REFERENCEID,PID,UAADHAR,PRODUCT_QUANTITY,STATUS,PAYMENT) VALUES ($referenceid, {$row['PID']},{$row['UAADHAR']},{$row['CART_QUANTITY']},'Placed','UnPaid')";
                 $result2 = mysqli_query($connection, $sql2);
                 if ($result2) {
                     $sql3 = "DELETE FROM cart_data WHERE COID = {$row['COID']}";
                     $result3 = mysqli_query($connection, $sql3);
                 }
+            }
+            if ($totalPrice > 0) {
+                $sql7 = "SELECT ORDERDATE,STATUS FROM order_data WHERE REFERENCEID = $referenceid";
+                $result7 = mysqli_query($connection, $sql7);
+                $row7 = mysqli_fetch_assoc($result7);
+                $sql5 = "INSERT INTO payment_data(REFERENCEID,TOTALPRICE,PAYMENTDATE,STATUS,UAADHAR) VALUES($referenceid,$totalPrice,'{$row7['ORDERDATE']}','{$row7['STATUS']}',$aadhar)";
+                $result5 = mysqli_query($connection, $sql5);
             }
             header('location:upersonal.php');
         }
