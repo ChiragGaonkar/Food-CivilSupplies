@@ -26,3 +26,21 @@
 .over{
     position:absolute;
 }
+
+.detailcard{
+    display: inline-block;
+    width:60%;
+    margin: 133px 56px;
+}
+.cdetailsbody{
+    background-repeat: no-repeat;
+    background-image: url(historyimg.jpg);
+}
+button{
+    border-radius:8px;
+    background-color:rgb(52, 224, 52);
+}
+button:hover{
+    cursor:pointer;
+    background-color: rgb(6, 248, 6);
+}
