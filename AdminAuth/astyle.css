@@ -1,0 +1,68 @@
+body {
+    background: #1d1d2c;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .myform {
+    border: 0px solid;
+    width: auto;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #5c6e58;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  }
+  
+  .inputs {
+    margin-top: 5px;
+  }
+  
+  .details {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .user-details-gradient {
+    background: rgb(63, 94, 251);
+    background: linear-gradient(
+      104deg,
+      rgba(63, 94, 251, 1) 0%,
+      rgba(252, 70, 107, 1) 65%
+    );
+  }
+  
+  .courier-details-gradient {
+    background: rgb(34, 193, 195);
+    background: linear-gradient(
+      117deg,
+      rgba(34, 193, 195, 1) 1%,
+      rgba(253, 187, 45, 1) 93%
+    );
+  }
+  
+  .personalContainer {
+    max-width: 80%;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+  
+  .personaldivinfo {
+    background: #f2d349;
+    padding: 40px;
+    margin: 40px;
+    border-radius: 20px;
+    width: 700px;
+    overflow-wrap: break-word;
+    font-family: "Cabin", sans-serif;
+    color: #5c6e58;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
+  }
+
+  .productadd{
+    background: #f2d349;
+   padding: 20px 20px 20px 20px;
+   border-radius: 20px;
+   width: auto;
+   height: 900px;
+   box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
+  }
+
+  
