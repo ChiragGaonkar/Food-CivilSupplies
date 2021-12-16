@@ -8,11 +8,11 @@ $pid = $_GET["updateid"];
 $sql = "Select *from `products` where Pid = $pid";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
-$pname = $row["Pname"];
-$quantity = $row["Quantity"];
-$price = $row["Price"];
-$md = $row["Manu_date"];
-$ed = $row["Expiry_date"];
+$pname = $row["PNAME"];
+$quantity = $row["QUANTITY"];
+$price = $row["PRICE"];
+$md = $row["MANU_DATE"];
+$ed = $row["EXPIRY_DATE"];
 //$old_img = $row['image'];
 
 
@@ -42,7 +42,7 @@ if (isset($_POST["submit"])) {
 
     //, image='$img_upload_path' 
 
-    $sql = "UPDATE `products` SET Pid=$pid, Pname='$pname', Quantity=$quantity, Price=$price, Manu_date='$md', Expiry_date='$ed' where Pid=$pid";
+    $sql = "UPDATE `products` SET PID=$pid, PNAME='$pname', QUANTITY=$quantity, PRICE=$price, MANU_DATE='$md', EXPIRY_DATE='$ed' where Pid=$pid";
 
     $result = mysqli_query($connection, $sql);
 
