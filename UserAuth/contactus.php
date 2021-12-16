@@ -3,6 +3,12 @@ include "../config.php";
 require "../mail_sender.php";
 error_reporting(0);
 session_start();
+if (isset($_SESSION['UAADHAR'])) {
+    if (isset($_POST['feedback_btn'])) {
+        echo "<script>alert('Hello Wolrd')</script>";
+    }
+}
+
 
 ?>
 
@@ -83,7 +89,7 @@ session_start();
                     style="margin: 100px 0px 100px 0px; width:1000px">
             </div>
             <div class="col-md-4 feebackform">
-                <form action="">
+                <form method="POST">
                     <h5 style="margin: 20px 0px 0px 40px;color:#008080">How satisfied are you overall with the support
                         of Food & Civil Supplies?</h5>
                     <div style="margin: 20px 0px 0px 40px;">
@@ -120,7 +126,7 @@ session_start();
                     </div>
 
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary" type="submit"
+                        <button class="btn btn-primary" type="submit" name="feedback_btn"
                             style="border-radius: #008080;background-color: #008080;">Send
                             Feedback</button>
                     </div>

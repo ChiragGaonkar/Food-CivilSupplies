@@ -77,7 +77,7 @@ if (isset($_SESSION['AID'])) {
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="dis.php">
+                                <a class="dropdown-item" href="">
                                     DISPLAY PRODUCT
                                 </a>
                             </li>
