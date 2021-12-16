@@ -134,6 +134,7 @@ error_reporting(0);
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Ouantity</th>
+                        <th scope="col">Product Type</th>
                         <th scope="col">Price</th>
                         <th scope="col">Manufacturing Date</th>
                         <th scope="col">Expiry Date</th>
@@ -154,7 +155,7 @@ error_reporting(0);
                             $quantity = $row["QUANTITY"];
                             $ptype = $row['PTYPE'];
                             $price = $row["PRICE"];
-                            $md = $row["MANU_PRICE"];
+                            $md = $row["MANU_DATE"];
                             $ed = $row["EXP_DATE"];
                             $deldate = $row['DISCARD_DATE'];
                             $image = $row['IMAGE'];
