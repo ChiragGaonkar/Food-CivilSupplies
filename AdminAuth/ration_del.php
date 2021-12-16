@@ -26,11 +26,11 @@ if (isset($_GET["deleteid"])) {
     if ($result) {
         if ($result1) {
             echo "<script>alert('Deleted Successfully')</script>";
-            header("location:dis.php");
+            header("location:ration_display.php");
         }
     }else {
         echo "<script>alert('Error Please Try Again')</script>";
-        header("location:dis.php");
+        header("location:ration_display.php");
        // die(mysqli_error($con));
     }
 }
