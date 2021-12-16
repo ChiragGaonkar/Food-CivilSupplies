@@ -11,6 +11,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="commonstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
 
     <title>Home Page</title>
 </head>
@@ -112,10 +114,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -123,7 +121,7 @@
     <!-- End of Navbar -->
 
     <!-- Front Page -->
-    <div class="container-fluid" style="background-color: #697bdf;">
+    <div class="container-fluid" style="background-color: #697bdf;" id="section1">
         <div class="row row-cols-1 row-cols-md-2  myfont1" style="height:100vh">
             <div class="col" style="max-height:0px">
                 <img src="Images/Front.jpeg" alt="" class="img-fluid float-center">
@@ -134,68 +132,145 @@
                     quis neque ratione non
                     eveniet temporibus quasi dolores iusto quia obcaecati laborum vel perferendis dolor, ad repellat
                     praesentium nemo!</p>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary" type="button"
-                        style="background-color: #f9e37a;border:#f9e37a;color:black;outline:none;box-shadow: none;">New
-                        Scheme</button>
-                    <button class="btn btn-primary" type="button"
-                        style="background-color: #f99b55;border:#f99b55;color:black;outline:none;box-shadow: none;">
-                        Customer
-                        Feedback</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid" style="background-color: tomato;">
-        <div style="height:100vh">
-            <div style="width: 20%;">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="msg">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat magnam maxime et
-                                    harum
-                                    ut explicabo est aspernatur ducimus distinctio nobis corporis praesentium, minima
-                                    vel
-                                    delectus architecto similique! Nam, commodi architecto!</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="msg">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat magnam maxime et
-                                    harum
-                                    ut explicabo est aspernatur ducimus distinctio nobis corporis praesentium, minima
-                                    vel
-                                    delectus architecto similique! Nam, commodi architecto!</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="msg">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat magnam maxime et
-                                    harum
-                                    ut explicabo est aspernatur ducimus distinctio nobis corporis praesentium, minima
-                                    vel
-                                    delectus architecto similique! Nam, commodi architecto!</p>
-                            </div>
-                        </div>
+                <a href="#section2" style="text-decoration: none;">
+                    <div class="d-grid gap-2 col-6 mx-auto" style="margin-top:5px;">
+                        <button class="btn btn-primary" type="button"
+                            style="background-color: #f9e37a;border:#f9e37a;color:black;outline:none;box-shadow: none;">New
+                            Scheme</button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                </a>
+                <a href="#section3" style="text-decoration: none;">
+                    <div class="d-grid gap-2 col-6 mx-auto" style="margin-top:5px;">
+                        <button class="btn btn-primary" type="button"
+                            style="background-color: #f99b55;border:#f99b55;color:black;outline:none;box-shadow: none;">
+                            Customer
+                            Feedback</button>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="background-color: green;">
+    </div>
+
+    <div class="container-fluid" style="background-color: #f8efe5;" id="section2">
+        <div style="height:100vh;">
+            <!-- 21. We (Heart) UX -->
+            <h2 style="padding-top: 50px;">Newly Launched Scheme</h2>
+            <div class="slider mx-auto" style="width: 98%;">
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FB9039;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FB9039;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FB9039;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FB9039;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FB9039;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color: #F8E5E5;" id="section3">
         <div style="height:100vh">
-            <h1>Customer Feedback</h1>
+            <h2 style="padding-top: 50px;">Customers Feedback</h2>
+            <!-- 27. Cowboy Bike -->
+            <div class="slider mx-auto" style="width: 98%;">
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FA255E;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FA255E;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FA255E;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FA255E;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+                <div class="card text-white  mb-3 feedback"
+                    style="max-width: 40rem; height: 30rem; padding-top: 100px; background-color: #FA255E;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Our Customers Valuable Feedback</h5>
+                        <hr>
+                        <p class="card-text text-center">Some quick example text to build on the card title and make up
+                            the bulk of the card's content.</p>
+                        <h6 class="text-end">~ Chirag Gaonkar</h6>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -222,6 +297,43 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+    <!-- jquery cdn link-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- slick link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- slick function -->
+    <script>
+    $(document).ready(function() {
+        $('.slider').slick({
+            centerMode: true,
+            centerPadding: '60px',
+            slidesToShow: 3,
+            responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    })
     </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->

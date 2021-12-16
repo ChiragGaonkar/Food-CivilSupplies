@@ -151,10 +151,6 @@ if (isset($_POST['ulogin_submit'])) {
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
-                    </li>
                 </ul>
             </div>
         </div>

@@ -170,10 +170,6 @@ if (isset($_POST['ureg_otp'])) {
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
-                    </li>
                 </ul>
             </div>
         </div>

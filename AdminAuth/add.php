@@ -2,21 +2,41 @@
 include "../config.php";
 session_start();
 error_reporting(0);
-if (isset($_SESSION['AID'])) {
-    $aid = $_SESSION['AID'];
-    $sql = "SELECT * FROM admin_data WHERE AID = $aid";
+if (isset($_POST["submit"])) {
+
+    $pid = $_POST["pid"];
+    $pname = $_POST["pname"];
+    $quantity = $_POST["quantity"];
+    $ptype = $_POST['ptype'];
+    $price = $_POST["price"];
+    $md = $_POST["date1"];
+    $ed = $_POST["date2"];
+    $district = $_SESSION['DISTRICT'];
+
+
+    $img_name = $_FILES['img_upload']['name'];
+    $tmp_name = $_FILES['img_upload']['tmp_name'];
+    $new_img_name = uniqid("IMG-", true) . '.' . $img_name;
+    $img_upload_path = '../uploads/' . $new_img_name;
+    move_uploaded_file($tmp_name, $img_upload_path);
+
+
+    $sql = "insert into product_data(PID,PNAME,QUANTITY,PTYPE,PRICE,MANU_DATE,EXP_DATE,DISTRICT,IMAGE) values ($pid,'$pname',$quantity,'$ptype',$price,'$md','$ed','$district','$img_upload_path')";
+
     $result = mysqli_query($connection, $sql);
+
     if ($result) {
-        $row = mysqli_fetch_assoc($result);
-        $afname = $row['AFNAME'];
-        $alname = $row['ALNAME'];
-        $_SESSION['DISTRICT'] = $row['ADISTRICT'];
-        $aemail = $row['AEMAIL'];
-        $addhar = $row['AAADHARNUM'];
+        echo "<script>alert('Product added successfully')</script>";
+    } else {
+        echo "<script>alert('Error! Please try again')</script>";
+        //echo "die(mysqli_error($con))";
     }
-} else {
+    header('location:add.php');
 }
+
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
@@ -26,13 +46,68 @@ if (isset($_SESSION['AID'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/5019775b3a.js" crossorigin="anonymous"></script>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="astyle.css">
 
-    <title>Admin</title>
+    <script>
+    function validate() {
+
+        var md = new Date(document.forms['myform']['date1'].value);
+        var ed = new Date(document.forms['myform']['date2'].value);
+        var img = document.forms['myform']['img_upload'];
+        let current = new Date();
+        var validExt = ["jpeg", "png", "jpg"];
+
+
+        //validating manfacturing date and expiry date
+
+        if (md > ed) {
+            document.getElementById('date2').innerHTML = "*Expiry date is less than Manufacturing date";
+            return false;
+        }
+        if (current > ed) {
+            document.getElementById('date2').innerHTML = "*Expiry date is less than current date";
+            return false;
+        }
+
+
+
+
+
+        //validating image 
+
+        if (img.value != '') {
+
+            var img_ext = img.value.substring(img.value.lastIndexOf('.') + 1);
+
+            var result = validExt.includes(img_ext);
+            if (result == false) {
+                document.getElementById('img_upload').innerHTML = "*Invalid file extension";
+                return false;
+            } else {
+                if (img.files[0].size > 1048576) {
+                    document.getElementById('img_upload').innerHTML = "*File should be less than 1MB";
+                    return false;
+                }
+            }
+        } else {
+            document.getElementById('img_upload').innerHTML = "*Please select an image";
+            return false;
+        }
+
+
+
+        return true;
+    }
+    </script>
+
+    <title>Add Product</title>
 </head>
 
 <body>
@@ -139,31 +214,92 @@ if (isset($_SESSION['AID'])) {
     </nav>
     <!-- End of Navbar -->
 
-    <!-- Personal Info -->
-    <?php
-    if (isset($_SESSION['AID'])) {
-        echo "
-     <div class='container personalContainer' style='background-color:#5c6e58;height:auto;'>
-     <div class='row justify-content-center align-items-center'>
-         <img src='../Images/Admin.png' class='col-md-4 img-fluid personal-img'
-             style='margin: 40px 0px 40px 0px; width:300px'>
-         <div class='col-md-4 text-start personaldivinfo'>
-             <h4>Name : {$afname} {$alname}</h4>
-             <h4>Aadhar Number : {$addhar}</h4>
-             <h4>District : {$_SESSION['DISTRICT']}</h4>
-             <h4>Email : {$aemail}</h4>
-         </div>
-     </div>
-    </div>
-     ";
-    } else {
-        echo " <div>
-            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
+
+
+    <!-- Add Product -->
+
+    <div class="container">
+
+        <div>
+            <br>
+            <h1 class="text-center" style="color: white;">ADD RATION</h1><br>
         </div>
-        ";
-    }
-    ?>
-    <!-- End of Personal Info -->
+        <div class="col-lg-3 m-auto d-block">
+            <form method="post" name="myform" onsubmit="return validate()" enctype="multipart/form-data"
+                class="productadd">
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT ID:</label>
+                    <br>
+                    <input type="number" min="0" placeholder="Product Id" name="pid" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT NAME:</label>
+                    <br>
+                    <!-- <input type="text" placeholder="Product Name" name="" autocomplete="off" required> -->
+                    <input type="text" placeholder="Product Name" name="pname" autocomplete="off" required
+                        class="form-control"
+                        onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" />
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">QUANTITY:</label>
+                    <br>
+                    <input type="number" min="1" placeholder="Quantity" name="quantity" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT TYPE:</label>
+                    <br>
+                    <select class="form-select" id="inputGroupSelect01" name="ptype">
+                        <option value="Kilogram" name="ptype">Kilogram</option>
+                        <option value="Litre" name="ptype">Litre</option>
+                    </select>
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRICE:</label>
+                    <br>
+                    <input type="number" step="0.01" min="0" max="100" placeholder="Price" name="price"
+                        autocomplete="off" required class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">MANUFACTURING DATE:</label>
+                    <br>
+                    <input type="date" placeholder="Manufacturing Date" name="date1" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">EXPIRY DATE:</label>
+                    <br>
+                    <input type="date" placeholder="Expiry Date" name="date2" autocomplete="off" required
+                        class="form-control"><br>
+                    <span id="date2"></span><br>
+                </div>
+                <div>
+                    <label style="font-weight: bold;">PRODUCT IMAGE:</label>
+                    <br>
+                    <input type="file" name="img_upload" class="form-control" required><br>
+                    <span id="img_upload"></span><br>
+                </div>
+                <br>
+                <div>
+                    <button type="reset" name="Reset" value="Reset" class="btn btn-primary float-start"
+                        style="background-color:brown; border:brown">Reset</button>
+                    <button type="submit" name="submit" value="Submit" class="btn btn-primary float-end"
+                        style="background-color:brown; border:brown">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- End of Product -->
+
 
     <!-- Footer -->
     <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
@@ -179,6 +315,9 @@ if (isset($_SESSION['AID'])) {
             </div>
         </div>
     </div>
+
+
+
     <!-- End of Footer -->
 
     <!-- Optional JavaScript; choose one of the two! -->

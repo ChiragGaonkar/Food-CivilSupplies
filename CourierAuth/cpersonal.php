@@ -70,7 +70,7 @@ if (isset($_SESSION['cid'])) {
 
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
+                        <a class="nav-link" style="margin-right: 10px;" href="contactus.php">Feedback</a>
                     </li>
 
                     <!-- LogOut -->

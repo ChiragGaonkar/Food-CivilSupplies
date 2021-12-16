@@ -34,12 +34,6 @@ if (isset($_SESSION['UAADHAR'])) {
         }
         header('location:upersonal.php');
     }
-} else {
-    echo "
-        <div>
-            <img src='../Images/PageNotFound.svg' class='img-fluid mx-auto d-block' alt='' style='max-width:40%; margin: 80px 0px 80px 0px'>
-        </div>
-        ";
 }
 
 ?>
@@ -97,14 +91,9 @@ if (isset($_SESSION['UAADHAR'])) {
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
-                            href="uorderstatus.php">Order Status</a>
-                    </li>
-
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
+                        <a class="nav-link" style="margin-right: 10px;" href="contactus.php">Feedback</a>
                     </li>
 
                     <!-- LogOut -->

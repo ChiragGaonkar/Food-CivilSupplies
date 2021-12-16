@@ -55,3 +55,12 @@ body {
   color: #5c6e58;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
 }
+
+.productadd {
+  background: #f2d349;
+  padding: 20px 20px 20px 20px;
+  border-radius: 20px;
+  width: auto;
+  height: 1000px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 50px 40px -7px;
+}

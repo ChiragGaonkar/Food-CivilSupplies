@@ -1,9 +1,8 @@
 <?php
 include "../config.php";
-session_start();
+require "../mail_sender.php";
 error_reporting(0);
-if (isset($_SESSION['UAADHAR'])) {
-}
+session_start();
 
 ?>
 
@@ -18,11 +17,10 @@ if (isset($_SESSION['UAADHAR'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <link rel="stylesheet" href="ustyle.css">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
-    </style>
-    <title>Order Status</title>
+
+    <title>Feedback</title>
 </head>
 
 <body>
@@ -60,14 +58,9 @@ if (isset($_SESSION['UAADHAR'])) {
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
-                            href="uorderstatus.php">Order Status</a>
-                    </li>
-
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
+                        <a class="nav-link active" style="margin-right: 10px;" href="contactus.php">Feedback</a>
                     </li>
 
                     <!-- LogOut -->
@@ -80,10 +73,68 @@ if (isset($_SESSION['UAADHAR'])) {
         </div>
     </nav>
     <!-- End of Navbar -->
-    <h1>Order Status</h1>
+    <!-- Registration Form -->
+    <div class="container-fluid" style="max-width: 100%; height:auto;">
+        <div class="row justify-content-center align-items-center " style="margin: 20px 0px 20px 0px;">
+            <div class="col-md-4 feedbackphoto">
+                <h2 style="margin: 20px 0px 0px 40px;color:#008080"> <strong>Feel free to drop us your
+                        feedback!</strong> </h2>
+                <img src="../Images/Feedback.svg" class="col-md-4 img-fluid" alt=""
+                    style="margin: 100px 0px 100px 0px; width:1000px">
+            </div>
+            <div class="col-md-4 feebackform">
+                <form action="">
+                    <h5 style="margin: 20px 0px 0px 40px;color:#008080">How satisfied are you overall with the support
+                        of Food & Civil Supplies?</h5>
+                    <div style="margin: 20px 0px 0px 40px;">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rating" value="1">
+                            <label class="form-check-label">Very unsatisfied</label>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rating" value="2">
+                            <label class="form-check-label">Somewhat unsatisfied</label>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rating" value="3" checked>
+                            <label class="form-check-label">Neither satisfied nor dissatisfied</label>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rating" value="4">
+                            <label class="form-check-label">Somewhat satisfied</label>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rating" value="5">
+                            <label class="form-check-label">Very satisfied</label>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-floating" style="margin: 40px 0px 40px 0px;">
+                        <textarea class="form-control feedbackmsg" placeholder="Leave a comment here"
+                            id="floatingTextarea2" style="height: 100px" required></textarea>
+                        <label for="floatingTextarea2">Please tell your reason's for giving this score here.</label>
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="submit"
+                            style="border-radius: #008080;background-color: #008080;">Send
+                            Feedback</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Registration Form -->
 
     <!-- Footer -->
-    <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
             <div class="col-lg-6 mx-auto">

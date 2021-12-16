@@ -1,14 +1,16 @@
 body {
+  background: #1d1d2c;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.heading {
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
+.feedback {
+  margin-top: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
-span {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+
+.feedbackContainer {
+  width: 200px;
+  height: 600px;
+  margin-top: 20px;
 }

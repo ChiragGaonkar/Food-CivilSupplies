@@ -109,3 +109,26 @@ body {
   padding-left: 20px;
   transition-duration: 2s;
 }
+
+.feedbackphoto {
+  background-color: #f2f9f9;
+  height: 600px;
+  color: #008080;
+}
+
+.feebackform {
+  background-color: white;
+  height: 600px;
+  color: #008080;
+}
+
+.feedbackmsg {
+  outline: none;
+  background-color: #f2f9f9;
+}
+
+.feedbackContainer {
+  width: 200px;
+  height: 600px;
+  margin-top: 20px;
+}

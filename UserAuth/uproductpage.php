@@ -81,14 +81,9 @@ img {
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="ucart.php">My Cart</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
-                            href="uorderstatus.php">Order Status</a>
-                    </li>
-
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
+                        <a class="nav-link" style="margin-right: 10px;" href="contactus.php">Feedback</a>
                     </li>
 
                     <!-- LogOut -->
@@ -111,7 +106,7 @@ img {
             echo "
             <div class='card productcard mt-auto' style='width: 20rem;'>
             <hr><h5 class='card-title text-center'>{$row['PNAME']}</h5><hr>
-                <img src='../Images/Wheat.jpg' class='card-img-top' alt='...'>
+                <img src='../uploads/{$row['IMAGE']}' class='card-img-top' alt='...'>
                 <div class='card-body'>
                     <table class='table table-borderless' style='margin:20px'>
                         <tbody>
