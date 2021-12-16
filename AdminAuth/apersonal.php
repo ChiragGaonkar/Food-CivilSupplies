@@ -69,7 +69,7 @@ if (isset($_SESSION['AID'])) {
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="add.php">
+                                <a class="dropdown-item" href="ration_add.php">
                                     ADD PRODUCT
                                 </a>
                             </li>
@@ -77,7 +77,7 @@ if (isset($_SESSION['AID'])) {
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="ration_display.php">
                                     DISPLAY PRODUCT
                                 </a>
                             </li>
@@ -85,7 +85,7 @@ if (isset($_SESSION['AID'])) {
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="discard.php">
+                                <a class="dropdown-item" href="ration_discard.php">
                                     DISCARDED PRODUCT
                                 </a>
                             </li>
@@ -95,7 +95,7 @@ if (isset($_SESSION['AID'])) {
                     <!-- Sales Info -->
                     <li class="nav-item">
                         <a class="nav-link" style="margin-right: 20px;" aria-current="page"
-                            href="ration_add.php">Sales</a>
+                            href="order_display.php">Sales</a>
                     </li>
 
                     <!-- User & Courier Details-->
@@ -121,11 +121,6 @@ if (isset($_SESSION['AID'])) {
                                 </a>
                             </li>
                         </ul>
-                    </li>
-
-                    <!-- Contact Us -->
-                    <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 10px;" href="#">Contact Us</a>
                     </li>
 
                     <!-- LogOut -->

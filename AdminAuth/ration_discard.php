@@ -16,8 +16,7 @@ error_reporting(0);
     <script src="https://kit.fontawesome.com/5019775b3a.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="astyle.css">
 
@@ -36,9 +35,7 @@ error_reporting(0);
             </a>
 
             <!-- Button which pops when window is minimized -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -46,14 +43,12 @@ error_reporting(0);
                 <ul class="navbar-nav" style="margin-left: auto;">
                     <!-- Personal Info -->
                     <li class="nav-item">
-                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
-                            href="apersonal.php">Personal Info</a>
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page" href="apersonal.php">Personal Info</a>
                     </li>
 
                     <!-- Ration Info -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Ration
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,18 +75,16 @@ error_reporting(0);
                             </li>
                         </ul>
                     </li>
-
+            
 
                     <!-- Sales Info -->
                     <li class="nav-item">
-                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
-                            href="order_display.php">Sales</a>
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="order_display.php">Sales</a>
                     </li>
 
                     <!-- User & Courier Details-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Details
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -113,6 +106,7 @@ error_reporting(0);
                         </ul>
                     </li>
 
+
                     <!-- LogOut -->
                     <li class="nav-item">
                         <a class="nav-link" style="margin-right: 10px;" href="alogout.php">Log-Out</a>
@@ -133,26 +127,25 @@ error_reporting(0);
 
         <br>
         <div class="table-responsive">
-            <table class="table table-bordered text-center">
+            <table class="table table-bordered   text-center">
 
                 <thead class="bg-dark text-white">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Ouantity</th>
-                        <th scope="col">Type</th>
                         <th scope="col">Price</th>
                         <th scope="col">Manufacturing Date</th>
                         <th scope="col">Expiry Date</th>
+                        <th scope="col">Discard Date</th>
                         <th scope="col">Image</th>
-                        <th colspan="2">Operations</th>
                     </tr>
                 </thead>
 
                 <tbody class="bg-dark text-white">
                     <?php
                     $district = $_SESSION['DISTRICT'];
-                    $sql = "Select * from `product_data` where DISTRICT = '$district'";
+                    $sql = "Select *from `discarded_data` where DISTRICT = '$district'";
                     $result = mysqli_query($connection, $sql);
                     if ($result) {
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -161,8 +154,9 @@ error_reporting(0);
                             $quantity = $row["QUANTITY"];
                             $ptype = $row['PTYPE'];
                             $price = $row["PRICE"];
-                            $md = $row["MANU_DATE"];
+                            $md = $row["MANU_PRICE"];
                             $ed = $row["EXP_DATE"];
+                            $deldate = $row['DISCARD_DATE'];
                             $image = $row['IMAGE'];
 
                             echo '<tr>
@@ -173,10 +167,8 @@ error_reporting(0);
                                     <td>' . $price . '</td>
                                     <td>' . $md . '</td>
                                     <td>' . $ed . '</td>
-                                    <<td><img src=' . $image . ' height="100px" width="100px"></a></td>
-                                    <td><a href="ration_update.php?updateid=' . $pid . '" data-toggle="tooltip" data-placement="bottom" title="UPDATE"> <i class="fa fa-edit" aria-hidden="true"></i></a></td>
-                                    <td><a href="ration_del.php?deleteid=' . $pid . '" data-toggle="tooltip" data-placement="bottom" title="DELETE"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                    </td>
+                                    <td>' . $deldate . '</td>
+                                    <<td><img src='.$image.' height="100px" width="100px"></a></td>
                                  </tr>';
                         }
                     }
@@ -185,6 +177,9 @@ error_reporting(0);
                     ?>
 
                 </tbody>
+
+                
+
             </table>
         </div>
 
@@ -201,8 +196,7 @@ error_reporting(0);
                 <p class="fs-5 mb-4">Department of Goa</p>
                 <hr>
                 <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/instagram-new.png" /></a>
-                <a href="#" class="fs-5 mb-4" style="margin-right: 20px; margin-left: 20px;"><img
-                        src="https://img.icons8.com/nolan/64/twitter.png" /></a>
+                <a href="#" class="fs-5 mb-4" style="margin-right: 20px; margin-left: 20px;"><img src="https://img.icons8.com/nolan/64/twitter.png" /></a>
                 <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/whatsapp.png" /></a>
             </div>
         </div>
@@ -215,8 +209,7 @@ error_reporting(0);
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->

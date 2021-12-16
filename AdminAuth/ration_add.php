@@ -1,206 +1,333 @@
 <?php
+include "../config.php";
 session_start();
 error_reporting(0);
-include "connect.php";
 if (isset($_POST["submit"])) {
+
     $pid = $_POST["pid"];
     $pname = $_POST["pname"];
     $quantity = $_POST["quantity"];
+    $ptype = $_POST['ptype'];
     $price = $_POST["price"];
     $md = $_POST["date1"];
     $ed = $_POST["date2"];
     $district = $_SESSION['DISTRICT'];
-    $image=$_POST['img_uplaod'];
 
-    $sql = "insert into `products` (Pid,Pname,Quantity,Price,Manu_date,Expiry_date,district,image) values ($pid,'$pname',$quantity,$price,'$md','$ed','$district','$image')";
 
-    $result = mysqli_query($con, $sql);
+    $img_name = $_FILES['img_upload']['name'];
+    $tmp_name = $_FILES['img_upload']['tmp_name'];
+    $new_img_name = uniqid("IMG-", true) . '.' . $img_name;
+    $img_upload_path = '../uploads/' . $new_img_name;
+    move_uploaded_file($tmp_name, $img_upload_path);
+
+
+    $sql = "insert into product_data(PID,PNAME,QUANTITY,PTYPE,PRICE,MANU_DATE,EXP_DATE,DISTRICT,IMAGE) values ($pid,'$pname',$quantity,'$ptype',$price,'$md','$ed','$district','$img_upload_path')";
+
+    $result = mysqli_query($connection, $sql);
 
     if ($result) {
         echo "<script>alert('Product added successfully')</script>";
     } else {
-        echo "<script>alert('Product id already exists')</script>";
+        echo "<script>alert('Error! Please try again')</script>";
         //echo "die(mysqli_error($con))";
     }
+    header('location:ration_display.php');
 }
 
 ?>
 
 
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Add Ration</title>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/5019775b3a.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="astyle.css">
+
+    <script>
+    function validate() {
+
+        var md = new Date(document.forms['myform']['date1'].value);
+        var ed = new Date(document.forms['myform']['date2'].value);
+        var img = document.forms['myform']['img_upload'];
+        let current = new Date();
+        var validExt = ["jpeg", "png", "jpg"];
+
+
+        //validating manfacturing date and expiry date
+
+        if (md > ed) {
+            document.getElementById('date2').innerHTML = "*Expiry date is less than Manufacturing date";
+            return false;
+        }
+        if (current > ed) {
+            document.getElementById('date2').innerHTML = "*Expiry date is less than current date";
+            return false;
+        }
+
+
+
+
+
+        //validating image 
+
+        if (img.value != '') {
+
+            var img_ext = img.value.substring(img.value.lastIndexOf('.') + 1);
+
+            var result = validExt.includes(img_ext);
+            if (result == false) {
+                document.getElementById('img_upload').innerHTML = "*Invalid file extension";
+                return false;
+            } else {
+                if (img.files[0].size > 1048576) {
+                    document.getElementById('img_upload').innerHTML = "*File should be less than 1MB";
+                    return false;
+                }
+            }
+        } else {
+            document.getElementById('img_upload').innerHTML = "*Please select an image";
+            return false;
+        }
+
+
+
+        return true;
+    }
+    </script>
+
+    <title>Add Product</title>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="padding: 10px 30px 10px 30px">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.php">
+                <!-- <img src="images/AdminLogo.png" style="width: 40px;" alt="Admin">
+                <img src="images/UserLogo.png" style="width: 40px;" alt="Admin">
+                <img src="images/DeliveryLogo.png" style="width: 40px;" alt="Admin"> -->
+                Food & Civil Supplies
+            </a>
+
+            <!-- Button which pops when window is minimized -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav" style="margin-left: auto;">
+                    <!-- Personal Info -->
+                    <li class="nav-item">
+                        <a class="nav-link active" style="margin-right: 20px;" aria-current="page"
+                            href="apersonal.php">Personal Info</a>
+                    </li>
+
+                    <!-- Ration Info -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ration
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="ration_add.php">
+                                    ADD PRODUCT
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="ration_display.php">
+                                    DISPLAY PRODUCT
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="ration_discard.php">
+                                    DISCARDED PRODUCT
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Sales Info -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 20px;" aria-current="page"
+                            href="order_display.php">Sales</a>
+                    </li>
+
+                    <!-- User & Courier Details-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="margin-right: 10px;" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Details
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="aUserDetails.php">
+                                    <img src="../Images/UserLogo.png" style="width: 40px;" alt="Admin">
+                                    Customer Details
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="aCourierDetails.php">
+                                    <img src="../Images/DeliveryLogo.png" style="width: 40px;" alt="Admin">
+                                    Courier Details
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- LogOut -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 10px;" href="alogout.php">Log-Out</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+
+
+
+    <!-- Add Product -->
+
     <div class="container">
-        <form method="post" name="myform" onsubmit="return validate()">
-            <div class="form-group">
-                <label>Product ID</label>
-                <br>
-                <input type="pid" placeholder="Enter the product id" name="pid" autocomplete="off" required><br>
-                <span id="pid"></span>
-                <br><br>
-            </div>
-            <div class="form-group">
-                <label>Product Name</label>
-                <br>
-                <input type="pname" placeholder="Enter product name" name="pname" autocomplete="off" required><br>
-                <span id="pname"></span>
-                <br><br>
-            </div>
-            <div class="form-group">
-                <label>Quantity</label>
-                <br>
-                <input type="quantity" placeholder="Enter the quantity" name="quantity" autocomplete="off" required><br>
-                <span id="quantity"></span>
-                <br><br>
-            </div>
-            <div class="form-group">
-                <label>Price</label>
-                <br>
-                <input type="price" placeholder="Enter the price" name="price" autocomplete="off" required><br>
-                <span id="price"></span>
-                <br><br>
-            </div>
-            <div class="form-group">
-                <label>Manufacturing Date</label>
-                <br>
-                <input type="date" placeholder="Enter the Manufacturing Date" name="date1" autocomplete="off" required>
-                <br><br>
-            </div>
-            <div class="form-group">
-                <label>Expiry Date</label>
-                <br>
-                <input type="date" placeholder="Enter the Expiry Date" name="date2" autocomplete="off" required><br>
-                <span id="date2"></span><br>
-            </div>
-            <div>
-                <label>Product Image</label>
-                <br>
-                <input type="file" name="img_upload"><br>
-                <span id="img_upload"></span>
-            </div>
+
+        <div>
             <br>
-            <button type="reset" name="Reset">Reset</button>
-            <button type="submit" name="submit">Submit</button>
-        </form>
+            <h1 class="text-center" style="color: white;">ADD RATION</h1><br>
+        </div>
+        <div class="col-lg-3 m-auto d-block">
+            <form method="post" name="myform" onsubmit="return validate()" enctype="multipart/form-data"
+                class="productadd">
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT ID:</label>
+                    <br>
+                    <input type="number" min="0" placeholder="Product Id" name="pid" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT NAME:</label>
+                    <br>
+                    <!-- <input type="text" placeholder="Product Name" name="" autocomplete="off" required> -->
+                    <input type="text" placeholder="Product Name" name="pname" autocomplete="off" required
+                        class="form-control"
+                        onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" />
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">QUANTITY:</label>
+                    <br>
+                    <input type="number" min="1" placeholder="Quantity" name="quantity" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRODUCT TYPE:</label>
+                    <br>
+                    <select class="form-select" id="inputGroupSelect01" name="ptype">
+                        <option value="Kilogram" name="ptype">Kilogram</option>
+                        <option value="Litre" name="ptype">Litre</option>
+                    </select>
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">PRICE:</label>
+                    <br>
+                    <input type="number" step="0.01" min="0" max="100" placeholder="Price" name="price"
+                        autocomplete="off" required class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">MANUFACTURING DATE:</label>
+                    <br>
+                    <input type="date" placeholder="Manufacturing Date" name="date1" autocomplete="off" required
+                        class="form-control">
+                    <br><br>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold;">EXPIRY DATE:</label>
+                    <br>
+                    <input type="date" placeholder="Expiry Date" name="date2" autocomplete="off" required
+                        class="form-control"><br>
+                    <span id="date2"></span><br>
+                </div>
+                <div>
+                    <label style="font-weight: bold;">PRODUCT IMAGE:</label>
+                    <br>
+                    <input type="file" name="img_upload" class="form-control" required><br>
+                    <span id="img_upload"></span><br>
+                </div>
+                <br>
+                <div>
+                    <button type="reset" name="Reset" value="Reset" class="btn btn-primary"
+                        style="background-color:brown;">Reset</button>
+                    <button type="submit" name="submit" value="Submit" class="btn btn-primary"
+                        style="background-color:brown;">Submit</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 
-    <script>
-        function validate() {
+    <!-- End of Product -->
 
 
-            var pid = document.forms['myform']['pid'].value;
-            var pname = document.forms['myform']['pname'].value;
-            var quan = document.forms['myform']['quantity'].value;
-            var pprice = document.forms['myform']['price'].value;
-            var img=document.forms['myform']['img_upload'];
-            var md = new Date(document.forms['myform']['date1'].value);
-            var ed = new Date(document.forms['myform']['date2'].value);
-            let current = new Date();
-            var er = /^-?[0-9]+$/;
-            var RegExpression = /^[a-zA-Z\s]*$/;
-            var validExt=["jpeg","png","jpg"];
-
-
-
-
-            //Checking whether id is less than 0
-
-            if (pid<=0) {
-                document.getElementById('pid').innerHTML = "*Product Id cannot be negative";
-                return false;
-            }
-
-
-            //Validating product name
-
-            if (!er.test(pid)) {
-                document.getElementById('pid').innerHTML = "*Enter an integer value";
-                return false;
-            }
-            if (!/\S/.test(pname)) {
-                document.getElementById("pname").innerHTML = "*Please enter a valid product name";
-                return false;
-           }
-            if (!RegExpression.test(pname)) {
-                document.getElementById("pname").innerHTML = "*Please enter a valid product name";
-                return false;
-            }
-
-
-            //validating quantity
-
-            if (quan <= 0) {
-                document.getElementById('quantity').innerHTML = "*Quantity cannot be less than 1";
-                return false;
-            }
-            if (!er.test(quan)) {
-                document.getElementById('quantity').innerHTML = "*Enter an integer value";
-                return false;
-            }
-
-        
-            //validating price
-
-            if (pprice <= 0) {
-                document.getElementById('price').innerHTML = "*Price should be less than zero";
-                return false;
-            }
-            if (!er.test(pprice)) {
-                document.getElementById('price').innerHTML = "*Enter an integer value";
-                return false;
-            }
+    <!-- Footer -->
+    <div class="bg-dark text-secondary px-4 py-5 text-center" style="margin-top: 20px;">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">Food & Civil Supplies</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">Department of Goa</p>
+                <hr>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/instagram-new.png" /></a>
+                <a href="#" class="fs-5 mb-4" style="margin-right: 20px; margin-left: 20px;"><img
+                        src="https://img.icons8.com/nolan/64/twitter.png" /></a>
+                <a href="#" class="fs-5 mb-4"><img src="https://img.icons8.com/nolan/64/whatsapp.png" /></a>
+            </div>
+        </div>
+    </div>
 
 
 
+    <!-- End of Footer -->
 
-            //validating manfacturing date and expiry date
+    <!-- Optional JavaScript; choose one of the two! -->
 
-            if (md > ed) {
-                document.getElementById('date2').innerHTML = "*Expiry date is less than Manufacturing date";
-                return false;
-            }
-            if (current > ed) {
-                document.getElementById('date2').innerHTML = "*Expiry date is less than current date";
-                return false;
-            }
-
-
-
-            
-
-            //validating image 
-
-            if (img.value!='') {
-
-                var img_ext=img.value.substring(img.value.lastIndexOf('.')+1);
-
-                var result=validExt.includes(img_ext);
-                if (result==false) {
-                    document.getElementById('img_upload').innerHTML = "*Invalid file extension";
-                    return false;
-                } else {
-                    if (pasreflaot(img.files[0].size/(1024*1024)>=1)) {
-                        document.getElementById('img_upload').innerHTML = "*File should be less than 1MB";
-                        return false;
-                    }
-                }
-                
-            } else {
-                document.getElementById('img_upload').innerHTML = "*Please select an image";
-                return false;
-            }
-
-
-
-            return true;
-        }
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
 </body>
 
 </html>
