@@ -1,0 +1,27 @@
+.ordersbody{
+    background-image: url(cordersbg.jpg);
+}
+
+.cards{
+
+    width: 31%;
+    margin: 15px 16px;
+    display: inline-block;
+    border-radius: 12px;
+}
+.cards:hover{
+    cursor: pointer;
+    background-color: rgb(102, 98, 98);
+    color: red;
+}
+.historybody{
+    background-image: url(historyimg.jpg);
+}
+
+.table{
+    width: 80%;
+    margin: 40px auto;
+}
+.over{
+    position:absolute;
+}
