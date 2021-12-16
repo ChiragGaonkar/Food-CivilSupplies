@@ -72,6 +72,7 @@
       { 
       ?>
 
+    <a href="corderdetail.php" >
     <span class="cards">
     <span class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
@@ -80,7 +81,7 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><?php     ..PRODUCT NAME..   ?></h5>
+        <h5 class="card-title"><?php     /*..PRODUCT NAME..*/   ?></h5>
         <p class="card-text">
           <strong>NAME:<?php   ...    ?></strong><br>
           <strong>ADDRESS:<?php     ...  ?></strong><br>
@@ -92,7 +93,8 @@
 </div>
 </span>
 </span>
-
+ </a>
+  
 <?php
     }
 ?>
